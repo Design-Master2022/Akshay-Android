@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.TextUtils
-import com.newsapp.newsapp.MainActivity
 import com.newsapp.newsapp.R
+import com.newsapp.newsapp.ui.news.MainActivity
 import com.newsapp.newsapp.utils.CommonSharedPreferences
 
 class SplashScreenActivity : AppCompatActivity() {

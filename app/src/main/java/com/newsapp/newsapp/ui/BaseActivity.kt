@@ -1,27 +1,20 @@
 package com.newsapp.newsapp.ui
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.server.InternetStatus
-import com.newsapp.newsapp.server.Response
-import com.newsapp.newsapp.utils.ExtProgressDialog
-import java.util.*
+import com.newsapp.newsapp.utils.Utils
+import com.newsapp.newsapp.utils.Utils.progressLoading
 
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    var progressLoading: ExtProgressDialog? = null
+//    var progressLoading: ExtProgressDialog? = null
     var isInternetAvailable = true
     var isCaptain = false
     private var service: Intent? = null
@@ -31,7 +24,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        Utils.setLocale(this)
-        progressLoading = getLoadingDialog(this, getString(R.string.loading))
+//        progressLoading = getLoadingDialog(this, getString(R.string.loading))
 
     }
 
@@ -76,20 +69,20 @@ abstract class BaseActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
     }
 
-    fun getLoadingDialog(
-        context: Context?,
-        strMessage: String?
-    ): ExtProgressDialog? {
-        if (progressLoading == null) { // context = context.getApplicationContext();
-            progressLoading =
-                ExtProgressDialog(context, R.style.dialogNoDim)
-            progressLoading?.setMessage(strMessage)
-            progressLoading?.setIndeterminate(true)
-            progressLoading?.setCanceledOnTouchOutside(false)
-            progressLoading?.setCancelable(true)
-        }
-        return progressLoading
-    }
+//    fun getLoadingDialog(
+//        context: Context?,
+//        strMessage: String?
+//    ): ExtProgressDialog? {
+//        if (progressLoading == null) { // context = context.getApplicationContext();
+//            progressLoading =
+//                ExtProgressDialog(context, R.style.dialogNoDim)
+//            progressLoading?.setMessage(strMessage)
+//            progressLoading?.setIndeterminate(true)
+//            progressLoading?.setCanceledOnTouchOutside(false)
+//            progressLoading?.setCancelable(true)
+//        }
+//        return progressLoading
+//    }
 
     private val networkStatusListener = Observer<InternetStatus> {
         when (it) {
@@ -107,12 +100,12 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun <T> networkObserver() = Observer<Response<T>> {
-        handleNetworkResponse(it)
-    }
-
-    open fun <T> handleNetworkResponse(response: Response<T>?) {}
-
+//    fun <T> networkObserver() = Observer<Response<T>> {
+//        handleNetworkResponse(it)
+//    }
+//
+//    open fun <T> handleNetworkResponse(response: Response<T>?) {}
+//
 
 
 }

@@ -1,178 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".ui.home.ProfileActivity">
-  <TextView
-    android:id="@+id/tv_home"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:background="@drawable/header"
-    android:backgroundTint="@color/colorGreen"
-    android:text="@string/settings"
-    android:textStyle="bold"
-    android:textColor="@color/black"
-    android:textSize="20dp"
-    android:gravity="center"/>
-  <ImageView
-    android:id="@+id/iv_back"
-    android:layout_width="50dp"
-    android:layout_height="20dp"
-    android:src="@drawable/ic_backwhite"
-    android:foregroundGravity="center_vertical"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_home"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@id/tv_home"/>
+    android:layout_height="match_parent"
+    tools:context=".ui.home.ProfileActivity">
 
-  <ImageView
-    android:id="@+id/iv_add_profile"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginTop="4dp"
-    android:src="@drawable/ic_editprofile"
-    android:layout_marginStart="10dp"
-    app:layout_constraintTop_toTopOf="@+id/tv_profile"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_profile"
-    android:foregroundGravity="center_vertical"
-    app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tv_home"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/header"
+        android:backgroundTint="@color/colorGreen"
+        android:gravity="center"
+        android:text="@string/settings"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-  <TextView
-    android:id="@+id/tv_profile"
-    android:layout_width="0dp"
-    android:layout_height="45dp"
-    android:gravity="center_vertical"
-    android:text="@string/my_profile"
-    android:textColor="@color/black"
-    android:layout_marginStart="10dp"
-    app:layout_constraintStart_toEndOf="@+id/iv_add_profile"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_home" />
-  <ImageView
-    android:id="@+id/iv_language"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="4dp"
-    android:src="@drawable/ic_editprofile"
-    android:foregroundGravity="center_vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/tv_language"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_language"
-    app:layout_constraintTop_toBottomOf="@+id/tv_profile"/>
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_backwhite"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_home" />
 
-  <TextView
-    android:id="@+id/tv_language"
-    android:layout_width="0dp"
-    android:layout_height="45dp"
-    android:text="@string/change_lang"
-    android:textColor="@color/black"
-    android:gravity="center_vertical"
-    android:layout_marginStart="10dp"
-    app:layout_constraintStart_toEndOf="@+id/iv_language"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_profile" />
-  <androidx.appcompat.widget.AppCompatSpinner
-    android:id="@+id/sp_lang"
-    android:layout_width="0dp"
-    android:layout_height="35dp"
-    android:background="@drawable/header"
-    android:layout_marginStart="5dp"
-    app:flow_horizontalBias="0"
-    app:layout_constraintWidth_percent=".2"
-    android:layout_marginEnd="6dp"
-    app:layout_constraintTop_toTopOf="@+id/tv_language"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_language"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_add_profile"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_editprofile"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_profile" />
 
-  <ImageView
-    android:id="@+id/iv_switch"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="4dp"
-    android:src="@drawable/ic_editprofile"
-    android:foregroundGravity="center_vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/tv_darkMode"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_darkMode"
-    app:layout_constraintTop_toBottomOf="@+id/iv_language"/>
+    <TextView
+        android:id="@+id/tv_profile"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/my_profile"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_add_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_home" />
 
-  <TextView
-    android:id="@+id/tv_darkMode"
-    android:layout_width="0dp"
-    android:layout_height="45dp"
-    android:text="@string/switch_dark_mode"
-    android:textColor="@color/black"
-    android:gravity="center_vertical"
-    android:layout_marginStart="10dp"
-    app:layout_constraintStart_toEndOf="@+id/iv_switch"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_language" />
-  <androidx.appcompat.widget.SwitchCompat
-    android:id="@+id/switch_mode"
-    android:layout_width="0dp"
-    android:layout_height="35dp"
-    android:layout_marginStart="5dp"
-    app:flow_horizontalBias="0"
-    app:layout_constraintWidth_percent=".2"
-    android:layout_marginEnd="6dp"
-    app:layout_constraintTop_toTopOf="@+id/tv_darkMode"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_darkMode"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_language"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_editprofile"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_language"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile"
+        app:layout_constraintTop_toTopOf="@+id/tv_language" />
 
-  <ImageView
-    android:id="@+id/iv_biometric"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="4dp"
-    android:src="@drawable/ic_editprofile"
-    android:foregroundGravity="center_vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/tv_biometric"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_biometric"
-    app:layout_constraintTop_toBottomOf="@+id/tv_darkMode"/>
+    <TextView
+        android:id="@+id/tv_language"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/change_lang"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_language"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile" />
 
-  <TextView
-    android:id="@+id/tv_biometric"
-    android:layout_width="0dp"
-    android:layout_height="45dp"
-    android:text="@string/enable_fingure_print"
-    android:textColor="@color/black"
-    android:gravity="center_vertical"
-    android:layout_marginStart="10dp"
-    app:layout_constraintStart_toEndOf="@+id/iv_biometric"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_darkMode" />
-  <ImageView
-    android:id="@+id/iv_logout"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="4dp"
-    android:src="@drawable/ic_logout"
-    android:foregroundGravity="center_vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/tv_logout"
-    app:layout_constraintBottom_toBottomOf="@+id/tv_logout"
-    app:layout_constraintTop_toBottomOf="@+id/tv_biometric"/>
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/sp_lang"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/header"
+        app:flow_horizontalBias="0"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_language"
+        app:layout_constraintWidth_percent=".2" />
 
-  <TextView
-    android:id="@+id/tv_logout"
-    android:layout_width="0dp"
-    android:layout_height="45dp"
-    android:text="@string/logout"
-    android:textColor="@color/black"
-    android:gravity="center_vertical"
-    android:layout_marginStart="10dp"
-    app:layout_constraintStart_toEndOf="@+id/iv_logout"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_biometric" />
+    <ImageView
+        android:id="@+id/iv_switch"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_editprofile"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_darkMode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_language"
+        app:layout_constraintTop_toTopOf="@+id/tv_darkMode" />
 
+    <TextView
+        android:id="@+id/tv_darkMode"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/switch_dark_mode"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_switch"
+        app:layout_constraintTop_toBottomOf="@+id/tv_language" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_mode"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="6dp"
+        app:flow_horizontalBias="0"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_darkMode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_darkMode"
+        app:layout_constraintWidth_percent=".2" />
+
+    <ImageView
+        android:id="@+id/iv_biometric"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_editprofile"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_biometric"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_darkMode"
+        app:layout_constraintTop_toTopOf="@+id/tv_biometric" />
+
+    <TextView
+        android:id="@+id/tv_biometric"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/enable_fingure_print"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_biometric"
+        app:layout_constraintTop_toBottomOf="@+id/tv_darkMode" />
+
+    <ImageView
+        android:id="@+id/iv_logout"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_biometric"
+        app:layout_constraintTop_toTopOf="@+id/tv_logout" />
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/logout"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_logout"
+        app:layout_constraintTop_toBottomOf="@+id/tv_biometric" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

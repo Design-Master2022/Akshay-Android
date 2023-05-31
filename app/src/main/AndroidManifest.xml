@@ -21,7 +21,7 @@
             android:name=".ui.home.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.news.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"

@@ -23,4 +23,23 @@
   <string name="logout">Logout</string>
   <string name="loading">Loading...</string>
   <string name="secret_key_name">biometric_sample_encryption_key</string>
+
+  <array name="categories">
+    <item name="select">Select Category</item>
+    <item name="general">General</item>
+    <item name="business">Business</item>
+    <item name="entertainment">Entertainment</item>
+    <item name="health">Health</item>
+    <item name="science">Science</item>
+    <item name="sports">Sports</item>
+    <item name="technology">Technology</item>
+  </array>
+
+  <array name="countries">
+    <item name="select">Select Country</item>
+    <item name="us">US</item>
+    <item name="ar">AR</item>
+    <item name="in">In</item>
+  </array>
+
 </resources>

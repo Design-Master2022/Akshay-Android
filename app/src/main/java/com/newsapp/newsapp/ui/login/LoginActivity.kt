@@ -5,15 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.Observer
-import com.newsapp.newsapp.MainActivity
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.biomatric.BiometricPromptUtils
 import com.newsapp.newsapp.biomatric.CryptographyManager
 import com.newsapp.newsapp.databinding.ActivityLoginBinding
+import com.newsapp.newsapp.ui.news.MainActivity
 import com.newsapp.newsapp.utils.CommonSharedPreferences
 import com.newsapp.newsapp.viewmodal.LoginViewModel
 

@@ -95,6 +95,6 @@ public class ExtProgressDialog extends Dialog {
     }
 
     public void setCancelListener(onCancelClickListener cancelListener) {
-        this.cancelListener = cancelListener;
+//        this.cancelListener = cancelListener;
     }
 }

@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit
 
 object NetworkRepository {
 
-    private val responseHandler: ResponseHandler by lazy {
-        ResponseHandler()
-    }
+//    private val responseHandler: ResponseHandler by lazy {
+//        ResponseHandler()
+//    }
 
     //creating a Network Interceptor to add api_key in all the request as authInterceptor
     private val interceptor = Interceptor { chain ->
@@ -50,6 +50,9 @@ object NetworkRepository {
     private val newsApi = getRetrofit().create(NewsApi::class.java)
 
 
+    suspend fun getTopHeadLines(country: String, category: String, pageNumber: Int) =
+        newsApi.getTopHeadLines(country, category, pageNumber)
+
 //    suspend fun signIn(loginRequest: LoginRequest): Response<LoginResponse> {
 //        return try {
 //            responseHandler.handleSuccess(newsApi.signIn(loginRequest), AppConstants.USER_LOGIN)
@@ -58,16 +61,14 @@ object NetworkRepository {
 //        }
 //    }
 
-
-
-    private fun <T> apiCall(request: T, requestCode: Int = -1): Response<T> {
-        //
-        return try {
-            responseHandler.handleSuccess(request, requestCode)
-        } catch (e: Exception) {
-            responseHandler.handleException(e, requestCode)
-        }
-    }
+//    private fun <T> apiCall(request: T, requestCode: Int = -1): Response<T> {
+//        //
+//        return try {
+//            responseHandler.handleSuccess(request, requestCode)
+//        } catch (e: Exception) {
+//            responseHandler.handleException(e, requestCode)
+//        }
+//    }
 
 
 }
