@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -89,19 +90,19 @@ object Utils {
 //    }
 
 
-//    @JvmStatic
-//    fun setLocale(context: Context) {
-//        if (!TextUtils.isEmpty(CommonSharedPreferences.readString(CommonSharedPreferences.LANG_ID))) {
-//            val myLocale =
-//                Locale(CommonSharedPreferences.readString(CommonSharedPreferences.LANG_ID))
-//            val res = context.resources
-//            val conf = res.configuration
-//            conf.locale = myLocale
-//            res.updateConfiguration(conf, res.displayMetrics)
-//        } else {
-//            //println("LOCALE_NULL")
-//        }
-//    }
+    @JvmStatic
+    fun setLocale(context: Context) {
+        if (!TextUtils.isEmpty(CommonSharedPreferences.readString(CommonSharedPreferences.LANG_ID))) {
+            val myLocale =
+                Locale(CommonSharedPreferences.readString(CommonSharedPreferences.LANG_ID))
+            val res = context.resources
+            val conf = res.configuration
+            conf.locale = myLocale
+            res.updateConfiguration(conf, res.displayMetrics)
+        } else {
+            //println("LOCALE_NULL")
+        }
+    }
 
     fun isAlphaNumeric(s: String): Boolean {
         return s != null && s.matches("^[a-zA-Z0-9]*$".toRegex());

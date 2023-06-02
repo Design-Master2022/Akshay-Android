@@ -16,6 +16,8 @@ class CommonSharedPreferences {
         const val IS_LOGGED_IN = "isLoggedIn"
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
         const val TOKEN = "TOKEN"
+        const val LANG_ID = "lang_id"
+        const val DARK_MODE_ENABLED = "dark_mode_enabled"
 
 
 

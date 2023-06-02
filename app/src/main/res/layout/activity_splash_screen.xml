@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".ui.login.SplashScreenActivity">
-
-  <androidx.appcompat.widget.AppCompatTextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/welcome_to"
-    android:gravity="center"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:background="?attr/background_color"
+    tools:context=".ui.login.SplashScreenActivity">
+<!--    android:background="@drawable/shape_round_corners"-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animImage"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_gravity="center|top"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:adjustViewBounds="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="news.json"
+        app:lottie_loop="false"
+        app:lottie_speed="1"
+        tools:ignore="ContentDescription">
+
+    </com.airbnb.lottie.LottieAnimationView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/app_name"
+        app:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="?attr/text_color"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

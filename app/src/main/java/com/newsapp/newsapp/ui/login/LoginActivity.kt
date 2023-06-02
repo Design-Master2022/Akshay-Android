@@ -2,7 +2,6 @@ package com.newsapp.newsapp.ui.login
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.biometric.BiometricManager
@@ -12,11 +11,12 @@ import com.newsapp.newsapp.R
 import com.newsapp.newsapp.biomatric.BiometricPromptUtils
 import com.newsapp.newsapp.biomatric.CryptographyManager
 import com.newsapp.newsapp.databinding.ActivityLoginBinding
+import com.newsapp.newsapp.ui.BaseActivity
 import com.newsapp.newsapp.ui.news.MainActivity
 import com.newsapp.newsapp.utils.CommonSharedPreferences
 import com.newsapp.newsapp.viewmodal.LoginViewModel
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     private lateinit var biometricPrompt: BiometricPrompt
     private val cryptographyManager = CryptographyManager()
     private val ciphertextWrapper
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             binding.useBiometrics.visibility = View.INVISIBLE
         }
-
+//        binding.username.requestFocus()
 //        binding.login.setOnClickListener {
 //            val intent = Intent(this@LoginActivity, MainActivity::class.java)
 //            CommonSharedPreferences.writeBoolean(CommonSharedPreferences.IS_LOGGED_IN,true)

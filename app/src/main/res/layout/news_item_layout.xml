@@ -6,11 +6,12 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginBottom="8dp"
-    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/background_color"
     android:clickable="true"
     app:cardCornerRadius="7dp">
 
-
+<!--    android:background="?attr/background_color"-->
+<!--    android:foreground="?android:attr/selectableItemBackground"-->
     <LinearLayout android:layout_width="match_parent"
         android:orientation="vertical"
         android:paddingTop="2dp"
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="huffingmanpost.com"
+            android:textColor="?attr/text_color"
             />
 
 
@@ -38,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_news_image"
                 android:layout_marginTop="10dp"
-                android:textColor="#000"
+                android:textColor="?attr/text_color"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:text="Lorem "
@@ -69,6 +71,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
                 android:text="Headline . 25 Hrs Ago"
+                android:textColor="?attr/text_color"
+
                 />
 
 <!--            <ImageView-->

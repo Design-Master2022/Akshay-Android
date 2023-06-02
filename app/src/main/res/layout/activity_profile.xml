@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/background_color"
     tools:context=".ui.home.ProfileActivity">
 
     <TextView
@@ -14,7 +15,7 @@
         android:backgroundTint="@color/colorGreen"
         android:gravity="center"
         android:text="@string/settings"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
         android:text="@string/my_profile"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_add_profile"
         app:layout_constraintTop_toBottomOf="@+id/tv_home" />
@@ -74,18 +75,20 @@
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
         android:text="@string/change_lang"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_language"
         app:layout_constraintTop_toBottomOf="@+id/tv_profile" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/sp_lang"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="6dp"
         android:background="@drawable/header"
+        android:entries="@array/lang"
+        android:theme="@style/mySpinnerItemStyle"
         app:flow_horizontalBias="0"
         app:layout_constraintBottom_toBottomOf="@+id/tv_language"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +115,7 @@
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
         android:text="@string/switch_dark_mode"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_switch"
         app:layout_constraintTop_toBottomOf="@+id/tv_language" />
@@ -148,8 +151,8 @@
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
-        android:text="@string/enable_fingure_print"
-        android:textColor="@color/black"
+        android:text="@string/enable_finger_print"
+        android:textColor="?attr/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_biometric"
         app:layout_constraintTop_toBottomOf="@+id/tv_darkMode" />
@@ -174,7 +177,7 @@
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
         android:text="@string/logout"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_logout"
         app:layout_constraintTop_toBottomOf="@+id/tv_biometric" />

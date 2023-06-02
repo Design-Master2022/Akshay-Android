@@ -1,5 +1,6 @@
 package com.newsapp.newsapp.ui.news
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import com.newsapp.newsapp.server.Resource
 import com.newsapp.newsapp.ui.BaseActivity
 import com.newsapp.newsapp.ui.adapter.NewsListAdapter
 import com.newsapp.newsapp.ui.home.ProfileActivity
+import com.newsapp.newsapp.utils.CommonSharedPreferences
 
 
 class MainActivity : BaseActivity() {
@@ -28,14 +30,30 @@ class MainActivity : BaseActivity() {
     private var countryName: String? = "us"
     private var categoryName: String? = "general"
 
+    private val newsCategories = mutableListOf<String>(
+        "", "general", "business",
+        "entertainment", "health",
+        "science", "sports", "technology"
+    )
+
+    private val countryList = mutableListOf<String>(
+        "", "us", "ar",
+        "in"
+    )
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.ivAdd.setOnClickListener {  startActivity(Intent(this, ProfileActivity::class.java)) }
+        binding.ivAdd.setOnClickListener {  startActivity(Intent(this, ProfileActivity::class.java)).also { finish() } }
 
-        networkRepository = NetworkRepository
-        viewModel = MainViewModel(networkRepository)
+        viewModel = MainViewModel(NetworkRepository)
+        NetworkRepository.application = baseContext.applicationContext as Application
+
+        val selectedCategory= CommonSharedPreferences.readInt("selectedCategory")
+        val selectedCountry= CommonSharedPreferences.readInt("selectedCountry")
 
         addRecyclerView()
 
@@ -74,13 +92,13 @@ class MainActivity : BaseActivity() {
                 if(position == 0){
                     return
                 }
-                countryName = parent?.getItemAtPosition(position) as String
+                countryName = countryList[position]
                 countryName?.let {
                     viewModel.topHeadLinesNewsPage = 1
                     viewModel.topHeadLinesNewsResponse = null
                     viewModel.getTopHeadLines(it, categoryName!!)
                 }
-
+                CommonSharedPreferences.writeInt("selectedCountry", position)
             }
         }
 
@@ -93,17 +111,18 @@ class MainActivity : BaseActivity() {
                 if(position == 0){
                     return
                 }
-                categoryName = parent?.getItemAtPosition(position) as String
+                categoryName = newsCategories[position]
                 categoryName?.let {
                     viewModel.topHeadLinesNewsPage = 1
                     viewModel.topHeadLinesNewsResponse = null
                     viewModel.getTopHeadLines(countryName!!, it)
                 }
-
+                CommonSharedPreferences.writeInt("selectedCategory", position)
             }
         }
 
-
+        binding.spCategory.setSelection(selectedCategory)
+        binding.spCountry.setSelection(selectedCountry)
 
 
     }

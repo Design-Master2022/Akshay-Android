@@ -1,0 +1,57 @@
+<resources>
+  <string name="app_name">تطبيق الأخبار</string>
+  <string name="internet_not_avl">الإنترنت غير متوفر !!</string>
+  <string name="ok">نعم</string>
+  <string name="prompt_info_title">مصادقة تطبيق الأخبار</string>
+  <string name="prompt_info_subtitle">الرجاء تسجيل الدخول للوصول</string>
+  <string name="prompt_info_description">تطبيق الأخبار يستخدم المصادقة البيومترية</string>
+  <string name="prompt_info_use_app_password">استخدم كلمة مرور التطبيق</string>
+  <string name="email_id">أدخل معرف البريد الإلكتروني</string>
+  <string name="empty_emailid">الرجاء إدخال معرف البريد الإلكتروني</string>
+  <string name="valid_email_id">الرجاء إدخال البريد الإلكتروني الصحيح</string>
+  <string name="enter_password">أدخل كلمة المرور</string>
+  <string name="empty_password">الرجاء إدخال كلمة المرور</string>
+  <string name="valid_password">يجب أن تتكون كلمة المرور من 6 أرقام</string>
+  <string name="login">تسجيل الدخول</string>
+  <string name="login_via_biometrics">تسجيل الدخول باستخدام القياسات الحيوية</string>
+  <string name="welcome_to">مرحبًا بك في تطبيق الأخبار</string>
+  <string name="settings">إعدادات</string>
+  <string name="my_profile">ملفي</string>
+  <string name="change_lang">تغيير اللغة</string>
+  <string name="switch_dark_mode">قم بتمكين الوضع المظلم</string>
+  <string name="enable_finger_print">تمكين بصمة الإصبع</string>
+  <string name="logout">تسجيل خروج</string>
+  <string name="loading">تحميل...</string>
+  <string name="secret_key_name">biometric_sample_encryption_key</string>
+  <string name="home">بيت</string>
+  <string name="country">دولة:</string>
+  <string name="category">فئة:</string>
+  <string name="english">إنجليزي</string>
+  <string name="arabic">عربي</string>
+  <string name="disable_dark_mode">تعطيل الوضع الداكن</string>
+
+  <array name="categories">
+    <item name="select">اختر الفئة</item>
+    <item name="general">عام</item>
+    <item name="business">عمل</item>
+    <item name="entertainment">ترفيه</item>
+    <item name="health">صحة</item>
+    <item name="science">علوم</item>
+    <item name="sports">رياضات</item>
+    <item name="technology">تكنولوجيا</item>
+  </array>
+
+  <array name="countries">
+    <item name="select">حدد الدولة</item>
+    <item name="us">نحن</item>
+    <item name="ar">أر</item>
+    <item name="in">في</item>
+  </array>
+
+  <array name="lang">
+    <item name="select">اختار اللغة</item>
+    <item name="english">إنجليزي</item>
+    <item name="arabic">عربي</item>
+  </array>
+
+</resources>
