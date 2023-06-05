@@ -18,6 +18,8 @@ class CommonSharedPreferences {
         const val TOKEN = "TOKEN"
         const val LANG_ID = "lang_id"
         const val DARK_MODE_ENABLED = "dark_mode_enabled"
+        const val SELECTED_CATEGORY = "selected_category"
+        const val SELECTED_COUNTRY = "selected_country"
 
 
 

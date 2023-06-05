@@ -27,8 +27,12 @@
   <string name="country">Country:</string>
   <string name="category">Category:</string>
   <string name="english">English</string>
+  <string name="select_lang">Choose Language</string>
   <string name="arabic">Arabic</string>
   <string name="disable_dark_mode">Disable dark mode</string>
+    <string name="no_fingerprint_sensor">This device doesnot have a fingerprint sensor</string>
+  <string name="biometric_sensors_unavailable">The biometric sensor is currently unavailable</string>
+  <string name="finger_print_has_not_renrolled">Your device doesn\'t have fingerprint saved,please check your security settings</string>
 
   <array name="categories">
     <item name="select">Select Category</item>

@@ -1,14 +1,15 @@
 package com.newsapp.newsapp.ui.home
 
+import android.R
+import android.app.AlertDialog
 import android.content.Intent
-import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import androidx.appcompat.app.AppCompatDelegate
+import android.widget.TextView
+import android.widget.Toast
 import androidx.biometric.BiometricManager
-import androidx.core.content.ContextCompat.startActivity
-import com.newsapp.newsapp.R
+import com.google.android.material.button.MaterialButton
 import com.newsapp.newsapp.databinding.ActivityProfileBinding
 import com.newsapp.newsapp.ui.BaseActivity
 import com.newsapp.newsapp.ui.login.LoginActivity
@@ -26,14 +27,15 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        profileViewModel = ProfileViewModel(baseContext.applicationContext)
+        profileViewModel = ProfileViewModel(this@ProfileActivity)
 
         // Saving state of our app
         // using SharedPreferences
         val isDarkModeOn = CommonSharedPreferences.readBoolean(CommonSharedPreferences.DARK_MODE_ENABLED)
-//        val selectedLanguage = CommonSharedPreferences.readInt(CommonSharedPreferences.LANG_ID)
 
-        binding.ivBack.setOnClickListener { finish() }
+        binding.ivBack.setOnClickListener {
+            loadDashboard()
+        }
         binding.tvBiometric.setOnClickListener { profileViewModel.showBiometricPromptForEncryption() }
         binding.tvLogout.setOnClickListener {
             val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
@@ -63,69 +65,71 @@ class ProfileActivity : BaseActivity() {
             binding.tvBiometric.visibility = View.GONE
         }
 
-        binding.spLang.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                if (position == 0) {
-                    return
-                }
-                val lang = parent?.getItemAtPosition(position) as String
-                lang.let {
-                    if (it == resources.getString(R.string.english)) {
-                        CommonSharedPreferences.writeString(CommonSharedPreferences.LANG_ID, "en")
-                        profileViewModel.changeLanguage("en", this@ProfileActivity)
-                    } else {
-                        CommonSharedPreferences.writeString(CommonSharedPreferences.LANG_ID, "ar")
-                        profileViewModel.changeLanguage("ar", this@ProfileActivity)
-                    }
-                }
-
-            }
-        }
 
         // set the switch to listen on checked change
         binding.switchMode.setOnCheckedChangeListener { _, isChecked ->
 
             if (isChecked) {
-                binding.tvDarkMode.text = getString(R.string.disable_dark_mode)
+                binding.tvDarkMode.text = getString(com.newsapp.newsapp.R.string.disable_dark_mode)
             } else {
-                binding.tvDarkMode.text = resources.getString(R.string.switch_dark_mode)
+                binding.tvDarkMode.text = resources.getString(com.newsapp.newsapp.R.string.switch_dark_mode)
             }
             profileViewModel.switchDarkMode(isChecked, this)
+        }
+
+        binding.ivLang.setOnClickListener{
+            showLanguageSelectionDialog()
+        }
+
+        binding.tvLanguage.setOnClickListener{
+            showLanguageSelectionDialog()
         }
 
 
         // When user reopens the app
         // after applying dark/light mode
         if (isDarkModeOn) {
-            binding.tvDarkMode.text = getString(R.string.disable_dark_mode)
+            binding.tvDarkMode.text = getString(com.newsapp.newsapp.R.string.disable_dark_mode)
             binding.switchMode.isChecked = true
         } else {
-            binding.tvDarkMode.text = getString(R.string.switch_dark_mode)
+            binding.tvDarkMode.text = getString(com.newsapp.newsapp.R.string.switch_dark_mode)
             binding.switchMode.isChecked = false
         }
-//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-//            setTheme(R.style.darkTheme) //when dark mode is enabled, we use the dark theme
-//        } else {
-//            setTheme(R.style.AppTheme)  //default app theme
-//        }
 
-//        if (selectedLanguage != 0) {
-//            binding.spLang.setSelection(selectedLanguage)
-//        }
+
+    }
+
+
+    private fun showLanguageSelectionDialog() {
+        val inflater = layoutInflater
+        val layout: View =
+            inflater.inflate(com.newsapp.newsapp.R.layout.change_lang_popup_layout, findViewById(com.newsapp.newsapp.R.id.container))
+        val englishBtn = layout.findViewById<MaterialButton>(com.newsapp.newsapp.R.id.english_lang)
+        val arabicBtn = layout.findViewById<MaterialButton>(com.newsapp.newsapp.R.id.arabic_lang)
+        val builder = AlertDialog.Builder(this@ProfileActivity)
+        builder.setView(layout)
+        val dialog = builder.create()
+        if (dialog?.isShowing == false) {
+            dialog.show()
+        }
+        englishBtn.setOnClickListener {
+            CommonSharedPreferences.writeString(CommonSharedPreferences.LANG_ID, "en")
+            profileViewModel.changeLanguage("en", this@ProfileActivity)
+            dialog.dismiss() }
+        arabicBtn.setOnClickListener {
+            CommonSharedPreferences.writeString(CommonSharedPreferences.LANG_ID, "ar")
+            profileViewModel.changeLanguage("ar", this@ProfileActivity)
+            dialog.dismiss() }
+    }
+
+    private fun loadDashboard(){
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        loadDashboard()
     }
 }

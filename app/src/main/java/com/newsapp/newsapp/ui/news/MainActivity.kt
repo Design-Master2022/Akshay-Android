@@ -1,6 +1,5 @@
 package com.newsapp.newsapp.ui.news
 
-import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.newsapp.newsapp.databinding.ActivityMainBinding
+import com.newsapp.newsapp.server.AppConstants
 import com.newsapp.newsapp.server.AppConstants.PAGE_SIZE
 import com.newsapp.newsapp.server.NetworkRepository
 import com.newsapp.newsapp.server.Resource
@@ -49,11 +49,11 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         binding.ivAdd.setOnClickListener {  startActivity(Intent(this, ProfileActivity::class.java)).also { finish() } }
 
-        viewModel = MainViewModel(NetworkRepository)
-        NetworkRepository.application = baseContext.applicationContext as Application
+        networkRepository = NetworkRepository
+        viewModel = MainViewModel(networkRepository)
 
-        val selectedCategory= CommonSharedPreferences.readInt("selectedCategory")
-        val selectedCountry= CommonSharedPreferences.readInt("selectedCountry")
+        val selectedCategory= CommonSharedPreferences.readInt(CommonSharedPreferences.SELECTED_CATEGORY)
+        val selectedCountry= CommonSharedPreferences.readInt(CommonSharedPreferences.SELECTED_COUNTRY)
 
         addRecyclerView()
 
@@ -98,7 +98,8 @@ class MainActivity : BaseActivity() {
                     viewModel.topHeadLinesNewsResponse = null
                     viewModel.getTopHeadLines(it, categoryName!!)
                 }
-                CommonSharedPreferences.writeInt("selectedCountry", position)
+                CommonSharedPreferences.writeInt(CommonSharedPreferences.SELECTED_COUNTRY, position)
+
             }
         }
 
@@ -117,7 +118,7 @@ class MainActivity : BaseActivity() {
                     viewModel.topHeadLinesNewsResponse = null
                     viewModel.getTopHeadLines(countryName!!, it)
                 }
-                CommonSharedPreferences.writeInt("selectedCategory", position)
+                CommonSharedPreferences.writeInt(CommonSharedPreferences.SELECTED_CATEGORY, position)
             }
         }
 
@@ -131,7 +132,7 @@ class MainActivity : BaseActivity() {
     var isLastPage = false
     var isScrolling = false
 
-    val scrollListener = object : RecyclerView.OnScrollListener(){
+    private val scrollListener = object : RecyclerView.OnScrollListener(){
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
@@ -167,15 +168,33 @@ class MainActivity : BaseActivity() {
             layoutManager = LinearLayoutManager(baseContext)
             addOnScrollListener(this@MainActivity.scrollListener)
         }
+
+        newsListAdapter.setOnItemClickListener { article ->
+                val intent = Intent(this, NewsDetailsActivity::class.java)
+                intent.putExtra(AppConstants.DETAIL_NEWS, article)
+                startActivity(intent)
+        }
     }
 
     private fun hideProgressBar (){
-        binding.newsProgressBar.visibility = View.INVISIBLE
+        binding.shimmerViewContainer.stopShimmer()
+        binding.shimmerViewContainer.visibility = View.GONE
         isLoading = false
     }
 
     private fun showProgressBar (){
-        binding.newsProgressBar.visibility = View.VISIBLE
+        binding.shimmerViewContainer.startShimmer()
+        binding.shimmerViewContainer.visibility = View.VISIBLE
         isLoading = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showProgressBar()
+    }
+
+    override fun onPause() {
+        hideProgressBar()
+        super.onPause()
     }
 }

@@ -7,7 +7,7 @@ import com.newsapp.newsapp.server.Resource
 import kotlinx.coroutines.*
 import retrofit2.Response
 
-class MainViewModel constructor(private val networkRepository: NetworkRepository, ) : ViewModel() {
+class MainViewModel constructor(private val networkRepository: NetworkRepository) : ViewModel() {
 
     val errorMessage = MutableLiveData<String>()
     val newsList: MutableLiveData<Resource<TopHeadLinesResponse>> = MutableLiveData()

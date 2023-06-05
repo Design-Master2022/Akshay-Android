@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.databinding.CommonAlertBinding
+import okhttp3.Cache
 import java.security.AccessController.getContext
 import java.security.MessageDigest
 import java.util.*
@@ -95,17 +96,42 @@ object Utils {
         if (!TextUtils.isEmpty(CommonSharedPreferences.readString(CommonSharedPreferences.LANG_ID))) {
             val myLocale =
                 Locale(CommonSharedPreferences.readString(CommonSharedPreferences.LANG_ID))
-            val res = context.resources
-            val conf = res.configuration
-            conf.locale = myLocale
-            res.updateConfiguration(conf, res.displayMetrics)
+            setLanguage(context, myLocale)
         } else {
             //println("LOCALE_NULL")
+            val myLocale =
+                Locale(Locale.getDefault().language)
+            CommonSharedPreferences.writeString(CommonSharedPreferences.LANG_ID, myLocale.toString())
+            setLanguage(context, myLocale)
         }
+    }
+
+    private fun setLanguage(context: Context, selectedLang: Locale){
+
+        val res = context.resources
+        val conf = res.configuration
+        conf.locale = selectedLang
+        res.updateConfiguration(conf, res.displayMetrics)
     }
 
     fun isAlphaNumeric(s: String): Boolean {
         return s != null && s.matches("^[a-zA-Z0-9]*$".toRegex());
+    }
+
+    var cacheSize = 10 * 1024 * 1024 // 10 MB
+
+    fun getCacheDirectory(context: Context) : Cache? {
+        return context.cacheDir?.let { Cache(it, cacheSize.toLong()) }
+    }
+
+    fun hasNetwork(context: Context): Boolean? {
+        var isConnected: Boolean? = false // Initial Value
+        val connectivityManager = context.getSystemService(
+            Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        if (activeNetwork != null && activeNetwork.isConnected)
+            isConnected = true
+        return isConnected
     }
 
 

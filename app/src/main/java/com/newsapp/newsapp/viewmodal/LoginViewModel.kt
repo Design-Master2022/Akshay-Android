@@ -26,7 +26,7 @@ class LoginViewModel(var context: Context) : ViewModel() {
 
 
     private fun validation(email: String, password: String): Boolean {
-            if (email?.isEmpty() == true) {
+            if (email.isEmpty()) {
                 showToast(context,context.getString(R.string.empty_emailid))
                 return false
             }
@@ -34,11 +34,11 @@ class LoginViewModel(var context: Context) : ViewModel() {
                 showToast(context,context.getString(R.string.valid_email_id))
                 return false
             }
-            if (password.isEmpty() == true) {
+            if (password.isEmpty()) {
                 showToast(context,context.getString(R.string.empty_password))
                 return false
             }
-            if (password.length!! < 6) {
+            if (password.length < 6) {
                 showToast(context,context.getString(R.string.valid_password))
                 return false
             }

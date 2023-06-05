@@ -3,21 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_8sdp"
     app:cardBackgroundColor="?attr/background_color"
     android:clickable="true"
-    app:cardCornerRadius="7dp">
+    app:cardCornerRadius="@dimen/_7sdp">
 
 <!--    android:background="?attr/background_color"-->
 <!--    android:foreground="?android:attr/selectableItemBackground"-->
     <LinearLayout android:layout_width="match_parent"
         android:orientation="vertical"
-        android:paddingTop="2dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:text="huffingmanpost.com"
             android:textColor="?attr/text_color"
+            android:textSize="@dimen/_12sdp"
             />
 
 
@@ -39,19 +40,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_news_image"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="?attr/text_color"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="@dimen/_14sdp"
                 android:text="Lorem "
                 />
 
             <ImageView
                 android:id="@+id/iv_news_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:scaleType="fitXY"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/ic_launcher"
@@ -62,28 +63,18 @@
         <RelativeLayout
             android:id="@+id/news_metadata"
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_timetag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:textSize="@dimen/_12sdp"
                 android:text="Headline . 25 Hrs Ago"
                 android:textColor="?attr/text_color"
 
                 />
-
-<!--            <ImageView-->
-<!--                android:id="@+id/iv_favourite"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:src="@drawable/ic_bookmark_border_black_24dp"-->
-<!--                android:layout_marginRight="5dp"-->
-<!--                />-->
-
 
         </RelativeLayout>
 

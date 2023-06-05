@@ -3,8 +3,12 @@ package com.newsapp.newsapp.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
+import android.widget.Toast
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.Observer
 import com.newsapp.newsapp.R
@@ -34,17 +38,8 @@ class LoginActivity : BaseActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loginViewModel = LoginViewModel(this)
-        val canAuthenticate = BiometricManager.from(applicationContext).canAuthenticate()
-        if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
-            if (ciphertextWrapper != null) {
-                binding.useBiometrics.visibility = View.VISIBLE
-            } else {
-                binding.useBiometrics.visibility = View.INVISIBLE
-            }
-        } else {
-            binding.useBiometrics.visibility = View.INVISIBLE
-        }
-//        binding.username.requestFocus()
+
+
 //        binding.login.setOnClickListener {
 //            val intent = Intent(this@LoginActivity, MainActivity::class.java)
 //            CommonSharedPreferences.writeBoolean(CommonSharedPreferences.IS_LOGGED_IN,true)
@@ -75,6 +70,59 @@ class LoginActivity : BaseActivity() {
             }
         })
 
+        //this method is check the availability of biometric capability
+        checkDeviceHasBiometric()
+
+    }
+
+    private fun hasBiometricCapability(context: Context): Int {
+        val biometricManager = BiometricManager.from(context)
+        return biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+    }
+
+    private fun checkDeviceHasBiometric(){
+        when(hasBiometricCapability(applicationContext)) {
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                if (ciphertextWrapper != null) {
+                    binding.useBiometrics.visibility = View.VISIBLE
+                } else {
+                    binding.useBiometrics.visibility = View.INVISIBLE
+                }
+            }
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
+                binding.useBiometrics.visibility = View.INVISIBLE
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.no_fingerprint_sensor),
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
+                binding.useBiometrics.visibility = View.INVISIBLE
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.biometric_sensors_unavailable),
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                binding.useBiometrics.visibility = View.INVISIBLE
+                val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                    putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+
+                }
+                binding.useBiometrics.isEnabled = false
+                startActivityForResult(enrollIntent, 100)
+//                Toast.makeText(
+//                    applicationContext,
+//                    getString(R.string.finger_print_has_not_renrolled),
+//                    Toast.LENGTH_LONG
+//                ).show()
+
+            }
+        }
     }
 
     private fun showBiometricPromptForDecryption() {

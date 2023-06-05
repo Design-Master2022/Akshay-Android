@@ -18,6 +18,7 @@
         <attr name="background_color" format="color"/>
         <attr name="text_color" format="color"/>
         <attr name="button_color" format="color"/>
+        <attr name="button_text_color" format="color"/>
         <attr name="text_light_color" format="color"/>
     </declare-styleable>
 
