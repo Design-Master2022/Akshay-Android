@@ -30,9 +30,11 @@
   <string name="select_lang">اختر اللغة</string>
   <string name="arabic">عربي</string>
   <string name="disable_dark_mode">تعطيل الوضع الداكن</string>
-    <string name="no_fingerprint_sensor">This device doesnot have a fingerprint sensor</string>
-  <string name="biometric_sensors_unavailable">The biometric sensor is currently unavailable</string>
-  <string name="finger_print_has_not_renrolled">Your device doesn\'t have fingerprint saved,please check your security settings</string>
+  <string name="no_fingerprint_sensor">لا يحتوي هذا الجهاز على مستشعر بصمة الإصبع</string>
+  <string name="biometric_sensors_unavailable">مستشعر المقاييس الحيوية غير متوفر حاليًا</string>
+  <string name="finger_print_has_not_renrolled">لم يتم حفظ بصمة الإصبع على جهازك ، يرجى التحقق من إعدادات الأمان</string>
+  <string name="network_failure">Network Failure</string>
+  <string name="conversion_error">Conversion Error</string>
 
   <array name="categories">
     <item name="select">اختر الفئة</item>

@@ -24,18 +24,20 @@
   <string name="loading">Loading...</string>
   <string name="secret_key_name">biometric_sample_encryption_key</string>
   <string name="home">Home</string>
-  <string name="country">Country:</string>
-  <string name="category">Category:</string>
+  <string name="country">Select Country:</string>
+  <string name="category">Select Category:</string>
   <string name="english">English</string>
   <string name="select_lang">Choose Language</string>
   <string name="arabic">Arabic</string>
   <string name="disable_dark_mode">Disable dark mode</string>
-    <string name="no_fingerprint_sensor">This device doesnot have a fingerprint sensor</string>
+  <string name="no_fingerprint_sensor">This device doesnot have a fingerprint sensor</string>
   <string name="biometric_sensors_unavailable">The biometric sensor is currently unavailable</string>
   <string name="finger_print_has_not_renrolled">Your device doesn\'t have fingerprint saved,please check your security settings</string>
+  <string name="network_failure">Network Failure</string>
+  <string name="conversion_error">Conversion Error</string>
 
   <array name="categories">
-    <item name="select">Select Category</item>
+<!--    <item name="select">Select Category</item>-->
     <item name="general">General</item>
     <item name="business">Business</item>
     <item name="entertainment">Entertainment</item>
@@ -46,16 +48,10 @@
   </array>
 
   <array name="countries">
-    <item name="select">Select Country</item>
+<!--    <item name="select">Select Country</item>-->
     <item name="us">US</item>
     <item name="ar">AR</item>
     <item name="in">In</item>
-  </array>
-
-  <array name="lang">
-    <item name="select">Select Language</item>
-    <item name="us">English</item>
-    <item name="ar">Arabic</item>
   </array>
 
 </resources>

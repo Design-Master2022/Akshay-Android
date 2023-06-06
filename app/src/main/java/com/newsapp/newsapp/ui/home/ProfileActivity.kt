@@ -1,13 +1,9 @@
 package com.newsapp.newsapp.ui.home
 
-import android.R
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.biometric.BiometricManager
 import com.google.android.material.button.MaterialButton
 import com.newsapp.newsapp.databinding.ActivityProfileBinding
@@ -15,12 +11,10 @@ import com.newsapp.newsapp.ui.BaseActivity
 import com.newsapp.newsapp.ui.login.LoginActivity
 import com.newsapp.newsapp.ui.news.MainActivity
 import com.newsapp.newsapp.utils.CommonSharedPreferences
-import java.util.*
 
 
 class ProfileActivity : BaseActivity() {
 
-    //    private val profileViewModel by viewModels<ProfileViewModel>()
     private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

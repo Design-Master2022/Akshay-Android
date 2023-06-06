@@ -1,11 +1,14 @@
 package com.newsapp.newsapp.utils
 
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.NetworkInfo
+import android.os.Build
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -20,50 +23,51 @@ import java.util.*
 
 object Utils {
 
-    var progressLoading: ExtProgressDialog? = null
     fun isMobileValid(mobile: String): Boolean {
         return mobile.matches(Regex("^([0]|\\+91)?\\d{10,12}"))
     }
 
-    fun isInternetOn(context: Context): Boolean {
-        val connection =
-            (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
-        if (connection.getNetworkInfo(0)!!.state == NetworkInfo.State.CONNECTED || connection.getNetworkInfo(
-                0
-            )!!
-                .getState() == NetworkInfo.State.CONNECTING || connection.getNetworkInfo(1)!!
-                .getState() == NetworkInfo.State.CONNECTING || connection.getNetworkInfo(1)!!
-                .getState() == NetworkInfo.State.CONNECTED
-        ) {
-            return true
-        } else if (connection.getNetworkInfo(0)!!
-                .getState() == NetworkInfo.State.DISCONNECTED
-            || connection.getNetworkInfo(1)!!
-                .getState() == NetworkInfo.State.DISCONNECTED
-        ) {
-            return false
+    fun isInternetAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            val activeNetwork = connectivityManager.activeNetwork ?: return false
+            val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+            return when{
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            connectivityManager.activeNetworkInfo?.run {
+                return when(type){
+                    ConnectivityManager.TYPE_WIFI -> true
+                    ConnectivityManager.TYPE_MOBILE -> true
+                    ConnectivityManager.TYPE_ETHERNET -> true
+                    else -> false
+                }
+            }
         }
         return false
     }
 
     fun commonInternetAlert(context: Context, message: String) {
         var customDialog: AlertDialog? = null
-        if (customDialog != null) {
-            customDialog.dismiss()
-        }
+        customDialog?.dismiss()
 
         val binding: CommonAlertBinding = CommonAlertBinding
             .inflate(LayoutInflater.from(context))
-        var customAlertBuilder = AlertDialog.Builder(context)
-        customAlertBuilder.setView(binding.getRoot())
+        val customAlertBuilder = AlertDialog.Builder(context)
+        customAlertBuilder.setView(binding.root)
         customDialog = customAlertBuilder.create()
-        customDialog.show()
-
-        customDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
+        customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding.tvCustomAlertMessage.text= message
         binding.cardCustomAlertOk.setOnClickListener {
             customDialog.dismiss()
         }
+        customDialog.show()
     }
 
     fun showToast(context: Context, msg: String) {
@@ -74,21 +78,6 @@ object Utils {
         return MessageDigest.getInstance("SHA-1").digest(input.toByteArray())
             .joinToString("") { "%02x".format(it) }
     }
-
-//    fun getLoadingDialog(
-//        context: Context?,
-//        strMessage: String?
-//    ): ExtProgressDialog? {
-//        if (progressLoading == null) { // context = context.getApplicationContext();
-//            progressLoading =
-//                ExtProgressDialog(context, R.style.dialogNoDim)
-//            progressLoading?.setMessage(strMessage)
-//            progressLoading?.setIndeterminate(true)
-//            progressLoading?.setCanceledOnTouchOutside(false)
-//            progressLoading?.setCancelable(true)
-//        }
-//        return progressLoading
-//    }
 
 
     @JvmStatic

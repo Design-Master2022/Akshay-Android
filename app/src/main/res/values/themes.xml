@@ -93,4 +93,22 @@
   <style name="dialogNoDim" parent="dialog">
     <item name="android:backgroundDimEnabled">false</item>
   </style>
+
+  <style name="myDialog" parent="Theme.AppCompat.Dialog">
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+  <style name="EditTextViewCustomWidthStyle" parent="android:Widget.TextView">
+    <item name="android:textColor">?attr/text_color</item>
+    <item name="android:textColorHint">?attr/text_light_color</item>
+    <item name="android:textSize">@dimen/_10sdp</item>
+    <item name="android:fontFamily">sans-serif</item>
+    <item name="android:layout_marginTop">@dimen/_5sdp</item>
+    <item name="android:background">@drawable/shape_rect_box_et</item>
+    <item name="android:gravity">center|start</item>
+    <item name="android:height">@dimen/_40sdp</item>
+    <item name="android:paddingStart">@dimen/dimen_10</item>
+  </style>
+
+
 </resources>

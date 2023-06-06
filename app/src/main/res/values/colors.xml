@@ -9,6 +9,9 @@
   <color name="white">#FFFFFFFF</color>
   <color name="colorGreen">#04C757</color>
   <color name="background">#dddddd</color>
+  <color name="appEditBoxBackground">#fafafa</color>
+  <color name="lightGreyBorder">#ebebeb</color>
+  <color name="colorPrimary">@color/teal_700</color>
 
   <!--  <color name="backgroundColor">@color/white</color>-->
 <!--  <color name="textColor">@color/black</color>-->

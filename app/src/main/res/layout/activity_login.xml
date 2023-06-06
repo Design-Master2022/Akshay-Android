@@ -7,32 +7,57 @@
     android:background="?attr/background_color"
     tools:context=".ui.login.LoginActivity">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?attr/text_color"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:textAppearance="?android:attr/textAppearanceLarge"-->
+<!--        android:textColor="?attr/text_color"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/guideline"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animImage"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center|top"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:adjustViewBounds="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_8sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="news_splash.json"
+        app:lottie_loop="false"
+        app:lottie_speed="1"
+        tools:ignore="ContentDescription">
+
+    </com.airbnb.lottie.LottieAnimationView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/username"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_margin="@dimen/standard_padding"
         android:hint="@string/email_id"
         android:inputType="textEmailAddress"
         android:maxLength="50"
+        style="@style/EditTextViewCustomWidthStyle"
         android:textAlignment="viewStart"
         android:textColor="?attr/text_color"
         android:textColorHint="?attr/text_light_color"
@@ -43,10 +68,11 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         android:layout_margin="@dimen/standard_padding"
         android:hint="@string/enter_password"
         android:imeOptions="actionDone"
+        style="@style/EditTextViewCustomWidthStyle"
         android:inputType="textPassword"
         android:textColor="?attr/text_color"
         android:textColorHint="?attr/text_light_color"
@@ -60,7 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/standard_padding"
         android:text="@string/login"
+        android:background="?attr/button_color"
         android:textColor="?attr/text_color"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password" />

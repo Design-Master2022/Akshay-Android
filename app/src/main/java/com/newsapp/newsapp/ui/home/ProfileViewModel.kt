@@ -18,7 +18,7 @@ import java.util.*
 
 class ProfileViewModel constructor(private val applicationContext: Context) : ViewModel() {
 
-    val cryptographyManager = CryptographyManager()
+    private val cryptographyManager = CryptographyManager()
     val ciphertextWrapper
         get() = cryptographyManager.getCiphertextWrapperFromSharedPrefs(
             applicationContext,
@@ -26,7 +26,6 @@ class ProfileViewModel constructor(private val applicationContext: Context) : Vi
             Context.MODE_PRIVATE,
             CommonSharedPreferences.CIPHERTEXT_WRAPPER
         )
-    var madeChangesFlag: Boolean = false
 
     fun showBiometricPromptForEncryption() {
         val canAuthenticate = BiometricManager.from(applicationContext).canAuthenticate()
@@ -40,10 +39,8 @@ class ProfileViewModel constructor(private val applicationContext: Context) : Vi
         }
     }
 
-    fun encryptAndStoreServerToken(authResult: BiometricPrompt.AuthenticationResult) {
-//        val fakeToken = java.util.UUID.randomUUID().toString()
+    private fun encryptAndStoreServerToken(authResult: BiometricPrompt.AuthenticationResult) {
         val  fakeToken = CommonSharedPreferences.readString(CommonSharedPreferences.TOKEN)
-//        fakeToken =
         authResult.cryptoObject?.cipher?.apply {
             fakeToken.let { token ->
                 Log.d(ContentValues.TAG, "The token from server is $token")
@@ -57,14 +54,14 @@ class ProfileViewModel constructor(private val applicationContext: Context) : Vi
                 )
             }
         }
-        (applicationContext as ProfileActivity).finish()
+        reloadProfilePage((applicationContext as ProfileActivity))
     }
 
     fun changeLanguage(language: String, activity: ProfileActivity){
         var locale: Locale? = null
         if (language == "en") {
             locale = Locale("en")
-        } else if (language.equals("ar")) {
+        } else if (language == "ar") {
             locale = Locale("ar")
         }
         Locale.setDefault(locale)
@@ -80,7 +77,7 @@ class ProfileViewModel constructor(private val applicationContext: Context) : Vi
         // else keep the switch text to enable dark mode
         if (isChecked) {
             // will turn it on
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             // it will set isDarkModeOn
             // boolean to true
             CommonSharedPreferences.writeBoolean(CommonSharedPreferences.DARK_MODE_ENABLED, true)

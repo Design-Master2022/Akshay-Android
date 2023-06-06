@@ -1,5 +1,6 @@
 package com.newsapp.newsapp.ui.login
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,26 +19,26 @@ import com.newsapp.newsapp.databinding.ActivityLoginBinding
 import com.newsapp.newsapp.ui.BaseActivity
 import com.newsapp.newsapp.ui.news.MainActivity
 import com.newsapp.newsapp.utils.CommonSharedPreferences
-import com.newsapp.newsapp.viewmodal.LoginViewModel
 
 class LoginActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel : LoginViewModel
     private lateinit var biometricPrompt: BiometricPrompt
     private val cryptographyManager = CryptographyManager()
     private val ciphertextWrapper
         get() = cryptographyManager.getCiphertextWrapperFromSharedPrefs(
-            applicationContext,
+            this,
             CommonSharedPreferences.SHARED_PREFS_FILENAME,
             Context.MODE_PRIVATE,
             CommonSharedPreferences.CIPHERTEXT_WRAPPER
         )
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var loginViewModel : LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loginViewModel = LoginViewModel(this)
+        loginViewModel = LoginViewModel(baseContext.applicationContext as Application)
 
 
 //        binding.login.setOnClickListener {
@@ -75,13 +76,8 @@ class LoginActivity : BaseActivity() {
 
     }
 
-    private fun hasBiometricCapability(context: Context): Int {
-        val biometricManager = BiometricManager.from(context)
-        return biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
-    }
-
     private fun checkDeviceHasBiometric(){
-        when(hasBiometricCapability(applicationContext)) {
+        when(loginViewModel.hasBiometricCapability(applicationContext)) {
             BiometricManager.BIOMETRIC_SUCCESS -> {
                 if (ciphertextWrapper != null) {
                     binding.useBiometrics.visibility = View.VISIBLE
@@ -148,12 +144,13 @@ class LoginActivity : BaseActivity() {
                     cryptographyManager.decryptData(textWrapper.ciphertext, it)
 //                SampleAppUser.fakeToken = plaintext
 
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 CommonSharedPreferences.writeBoolean(CommonSharedPreferences.IS_LOGGED_IN,true)
                 startActivity(intent)
                 finish()
             }
         }
     }
+
 
 }

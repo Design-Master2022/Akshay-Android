@@ -11,15 +11,12 @@ import com.newsapp.newsapp.R
 import com.newsapp.newsapp.server.InternetStatus
 import com.newsapp.newsapp.utils.CommonSharedPreferences
 import com.newsapp.newsapp.utils.Utils
-import com.newsapp.newsapp.utils.Utils.progressLoading
 
 
 abstract class BaseActivity : AppCompatActivity() {
 
 //    var progressLoading: ExtProgressDialog? = null
     var isInternetAvailable = true
-    var isCaptain = false
-    private var service: Intent? = null
 
 
 
@@ -58,7 +55,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        progressLoading?.dismiss()
+//        progressLoading?.dismiss()
     }
 
     override fun onResume() {

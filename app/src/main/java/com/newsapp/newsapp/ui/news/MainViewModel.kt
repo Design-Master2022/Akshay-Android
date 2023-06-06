@@ -1,15 +1,29 @@
 package com.newsapp.newsapp.ui.news
 
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.ConnectivityManager.*
+import android.net.NetworkCapabilities.*
+import android.os.Build
+import androidx.core.content.getSystemService
 import androidx.lifecycle.*
+import com.newsapp.newsapp.R
+import com.newsapp.newsapp.modal.Article
 import com.newsapp.newsapp.modal.TopHeadLinesResponse
+import com.newsapp.newsapp.server.AppConstants.DEFAULT_CATEGORY
+import com.newsapp.newsapp.server.AppConstants.DEFAULT_COUNTRY
 import com.newsapp.newsapp.server.NetworkRepository
 import com.newsapp.newsapp.server.Resource
+import com.newsapp.newsapp.utils.NewsApp
+import com.newsapp.newsapp.utils.Utils
 import kotlinx.coroutines.*
 import retrofit2.Response
+import java.io.IOException
 
-class MainViewModel constructor(private val networkRepository: NetworkRepository) : ViewModel() {
+class MainViewModel constructor(application: Application, private val networkRepository: NetworkRepository) : AndroidViewModel(application) {
 
-    val errorMessage = MutableLiveData<String>()
+    private val errorMessage = MutableLiveData<String>()
     val newsList: MutableLiveData<Resource<TopHeadLinesResponse>> = MutableLiveData()
     var job: Job? = null
     var topHeadLinesNewsPage = 1
@@ -18,7 +32,7 @@ class MainViewModel constructor(private val networkRepository: NetworkRepository
     val loading = MutableLiveData<Boolean>()
 
     init {
-        getTopHeadLines("us", "general")
+        getTopHeadLines(DEFAULT_COUNTRY, DEFAULT_CATEGORY)
     }
 
     fun getTopHeadLines(countryCode: String, category: String) = viewModelScope.launch {
@@ -43,6 +57,24 @@ class MainViewModel constructor(private val networkRepository: NetworkRepository
         }
         return Resource.Error(response.message())
     }
+
+//    private suspend fun safeTopHeadlinesNews(countryCode: String, category: String){
+//        newsList.postValue(Resource.Loading())
+////        try{
+////            if(Utils.isInternetAvailable(getApplication<NewsApp>())){
+//                val response = networkRepository.getTopHeadLines(countryCode, category, topHeadLinesNewsPage )
+//                newsList.postValue(handleToHeadelineNewsResponse(response))
+//
+////
+////        } catch (t: Throwable){
+////            when(t){
+////                is IOException -> newsList.postValue(Resource.Error(getApplication<NewsApp>().getString(R.string.network_failure)))
+////                else -> newsList.postValue(Resource.Error(getApplication<NewsApp>().getString(R.string.conversion_error)))
+////            }
+////        }
+//
+//    }
+
 
     private fun onError(message: String) {
         errorMessage.value = message
