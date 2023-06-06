@@ -34,8 +34,8 @@
   <string name="no_fingerprint_sensor">لا يحتوي هذا الجهاز على مستشعر بصمة الإصبع</string>
   <string name="biometric_sensors_unavailable">مستشعر المقاييس الحيوية غير متوفر حاليًا</string>
   <string name="finger_print_has_not_renrolled">لم يتم حفظ بصمة الإصبع على جهازك ، يرجى التحقق من إعدادات الأمان</string>
-  <string name="network_failure">Network Failure</string>
-  <string name="conversion_error">Conversion Error</string>
+  <string name="network_failure">فشل في الشبكة</string>
+  <string name="conversion_error">خطأ في التحويل</string>
 
   <array name="categories">
     <item name="select">اختر الفئة</item>
