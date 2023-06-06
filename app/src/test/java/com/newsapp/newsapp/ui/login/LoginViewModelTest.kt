@@ -1,5 +1,8 @@
 package com.newsapp.newsapp.ui.login
 
+import android.app.Application
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import org.junit.Before
@@ -15,8 +18,14 @@ class LoginViewModelTest {
         @Before
         fun setup() {
 
-            // Instantiate the ViewModel
-            loginViewModel = LoginViewModel()
+            // Get the Application context
+            val context = ApplicationProvider.getApplicationContext<Context>()
+
+            // Cast the context to an Application instance
+            val application = context as Application
+
+            // Instantiate the ViewModel with the Application instance
+            loginViewModel = LoginViewModel(application)
         }
 
     @Test

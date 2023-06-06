@@ -32,15 +32,15 @@ class NetworkRepository(private val application: Application) {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             val originalResponse: Response = chain.proceed(chain.request())
-            val cacheControl = originalResponse.header("Cache-Control")
+            val cacheControl = originalResponse.header(AppConstants.HEADER_CACHE_CONTROL)
             return if (cacheControl == null || cacheControl.contains("no-store") || cacheControl.contains(
                     "cache"
                 ) ||
                 cacheControl.contains("must-revalidate") || cacheControl.contains("max-age=0")
             ) {
                 originalResponse.newBuilder()
-                    .removeHeader("Pragma")
-                    .header("Cache-Control", "public, max-age=" + 5000)
+                    .removeHeader(AppConstants.HEADER_PRAGMA)
+                    .header(AppConstants.HEADER_CACHE_CONTROL, "public, max-age=" + 5000)
                     .build()
             } else {
                 originalResponse
@@ -53,10 +53,10 @@ class NetworkRepository(private val application: Application) {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             var request: Request = chain.request()
-            if ((application as NewsApp).hasNetwork() == false) {
+            if (!(application as NewsApp).hasNetwork()) {
                 request = request.newBuilder()
-                    .removeHeader("Pragma")
-                    .header("Cache-Control", "public, only-if-cached")
+                    .removeHeader(AppConstants.HEADER_PRAGMA)
+                    .header(AppConstants.HEADER_CACHE_CONTROL, "public, only-if-cached")
                     .build()
             }
             return chain.proceed(request)
