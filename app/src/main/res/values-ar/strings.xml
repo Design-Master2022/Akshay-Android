@@ -12,6 +12,7 @@
   <string name="enter_password">أدخل كلمة المرور</string>
   <string name="empty_password">الرجاء إدخال كلمة المرور</string>
   <string name="valid_password">يجب أن تتكون كلمة المرور من 6 أرقام</string>
+  <string name="an_error_occured">حدث خطأ</string>
   <string name="login">تسجيل الدخول</string>
   <string name="login_via_biometrics">تسجيل الدخول باستخدام القياسات الحيوية</string>
   <string name="welcome_to">مرحبًا بك في تطبيق الأخبار</string>
@@ -54,10 +55,5 @@
     <item name="in">في</item>
   </array>
 
-  <array name="lang">
-    <item name="select">اختار اللغة</item>
-    <item name="english">إنجليزي</item>
-    <item name="arabic">عربي</item>
-  </array>
 
 </resources>

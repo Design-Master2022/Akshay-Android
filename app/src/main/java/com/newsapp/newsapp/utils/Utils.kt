@@ -1,7 +1,6 @@
 package com.newsapp.newsapp.utils
 
 
-import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -13,10 +12,8 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.newsapp.newsapp.R
 import com.newsapp.newsapp.databinding.CommonAlertBinding
 import okhttp3.Cache
-import java.security.AccessController.getContext
 import java.security.MessageDigest
 import java.util.*
 
@@ -106,22 +103,5 @@ object Utils {
     fun isAlphaNumeric(s: String): Boolean {
         return s != null && s.matches("^[a-zA-Z0-9]*$".toRegex());
     }
-
-    var cacheSize = 10 * 1024 * 1024 // 10 MB
-
-    fun getCacheDirectory(context: Context) : Cache? {
-        return context.cacheDir?.let { Cache(it, cacheSize.toLong()) }
-    }
-
-    fun hasNetwork(context: Context): Boolean? {
-        var isConnected: Boolean? = false // Initial Value
-        val connectivityManager = context.getSystemService(
-            Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-        if (activeNetwork != null && activeNetwork.isConnected)
-            isConnected = true
-        return isConnected
-    }
-
 
 }

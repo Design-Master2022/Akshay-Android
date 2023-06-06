@@ -23,13 +23,9 @@ import java.io.IOException
 
 class MainViewModel constructor(application: Application, private val networkRepository: NetworkRepository) : AndroidViewModel(application) {
 
-    private val errorMessage = MutableLiveData<String>()
     val newsList: MutableLiveData<Resource<TopHeadLinesResponse>> = MutableLiveData()
-    var job: Job? = null
     var topHeadLinesNewsPage = 1
     var topHeadLinesNewsResponse : TopHeadLinesResponse? = null
-
-    val loading = MutableLiveData<Boolean>()
 
     init {
         getTopHeadLines(DEFAULT_COUNTRY, DEFAULT_CATEGORY)
@@ -56,33 +52,5 @@ class MainViewModel constructor(application: Application, private val networkRep
             }
         }
         return Resource.Error(response.message())
-    }
-
-//    private suspend fun safeTopHeadlinesNews(countryCode: String, category: String){
-//        newsList.postValue(Resource.Loading())
-////        try{
-////            if(Utils.isInternetAvailable(getApplication<NewsApp>())){
-//                val response = networkRepository.getTopHeadLines(countryCode, category, topHeadLinesNewsPage )
-//                newsList.postValue(handleToHeadelineNewsResponse(response))
-//
-////
-////        } catch (t: Throwable){
-////            when(t){
-////                is IOException -> newsList.postValue(Resource.Error(getApplication<NewsApp>().getString(R.string.network_failure)))
-////                else -> newsList.postValue(Resource.Error(getApplication<NewsApp>().getString(R.string.conversion_error)))
-////            }
-////        }
-//
-//    }
-
-
-    private fun onError(message: String) {
-        errorMessage.value = message
-        loading.value = false
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        job?.cancel()
     }
 }

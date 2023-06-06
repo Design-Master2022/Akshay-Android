@@ -9,6 +9,14 @@ import com.newsapp.newsapp.R
 // Since we are using the same methods in more than one Activity, better give them their own file.
 object BiometricPromptUtils {
     private const val TAG = "BiometricPromptUtils"
+
+    /**
+     * Create a BiometricPrompt instance.
+     *
+     * @param activity The AppCompatActivity instance.
+     * @param processSuccess Callback function to handle authentication success.
+     * @return The created BiometricPrompt instance.
+     */
     fun createBiometricPrompt(
         activity: AppCompatActivity,
         processSuccess: (BiometricPrompt.AuthenticationResult) -> Unit
@@ -36,6 +44,12 @@ object BiometricPromptUtils {
         return BiometricPrompt(activity, executor, callback)
     }
 
+    /**
+     * Create a BiometricPrompt.PromptInfo instance.
+     *
+     * @param activity The AppCompatActivity instance.
+     * @return The created BiometricPrompt.PromptInfo instance.
+     */
     fun createPromptInfo(activity: AppCompatActivity): BiometricPrompt.PromptInfo =
         BiometricPrompt.PromptInfo.Builder().apply {
             setTitle(activity.getString(R.string.prompt_info_title))

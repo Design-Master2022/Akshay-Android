@@ -1,7 +1,5 @@
 package com.newsapp.newsapp.ui.adapter
 
-import android.app.Activity
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,29 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.modal.Article
-import com.newsapp.newsapp.server.AppConstants.DETAIL_NEWS
-import com.newsapp.newsapp.ui.news.MainViewModel
-import com.newsapp.newsapp.ui.news.NewsDetailsActivity
 
-class NewsListAdapter: RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>()
-{
-    inner class NewsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var tv_newsSource: TextView
-        var tv_newsTitle:TextView
-        var iv_newsImage: ImageView
-        var tv_newsTag:TextView
+class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
 
-        init {
-            tv_newsSource = itemView.findViewById(R.id.newsSource)
-            tv_newsTitle = itemView.findViewById(R.id.newsTitle)
-            iv_newsImage = itemView.findViewById(R.id.iv_news_image)
-            tv_newsTag = itemView.findViewById(R.id.tv_timetag)
-
-        }
-
+    inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // Views in the item layout
+        var tvNewsSource: TextView = itemView.findViewById(R.id.newsSource)
+        var tvNewsTitle: TextView = itemView.findViewById(R.id.newsTitle)
+        var ivNewsImage: ImageView = itemView.findViewById(R.id.iv_news_image)
+        var tvNewsTag: TextView = itemView.findViewById(R.id.tv_timetag)
     }
 
-    private val diefferCallback = object: DiffUtil.ItemCallback<Article>() {
+    // DiffUtil callback for efficient list updates
+    private val diffCallback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url
         }
@@ -45,14 +33,14 @@ class NewsListAdapter: RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>()
         }
     }
 
-    val differ = AsyncListDiffer(this, diefferCallback)
+    // AsyncListDiffer for handling list updates asynchronously
+    val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        return NewsViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.news_item_layout, parent, false
-            )
-        )
+        // Inflate the item layout and return a NewsViewHolder
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.news_item_layout, parent, false)
+        return NewsViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -61,21 +49,26 @@ class NewsListAdapter: RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>()
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = differ.currentList[position]
+
+        // Set the data to views in the NewsViewHolder
         holder.itemView.apply {
-            Glide.with(this).load(article.urlToImage).into(holder.iv_newsImage)
-            holder.tv_newsTitle.text = article.title
-            holder.tv_newsSource.text = article.source.name
-            setOnClickListener{
-                onItemClickListener?.let {
-                    it(article)
+            Glide.with(this).load(article.urlToImage).into(holder.ivNewsImage)
+            holder.tvNewsTitle.text = article.title
+            holder.tvNewsSource.text = article.source.name
+
+            setOnClickListener {
+                // Invoke the item click listener if set
+                onItemClickListener?.let { listener ->
+                    listener(article)
                 }
             }
         }
     }
 
-    private var onItemClickListener: ((Article) -> Unit)?= null
+    private var onItemClickListener: ((Article) -> Unit)? = null
 
-    fun setOnItemClickListener( listener: (Article) -> Unit) {
+    // Set the item click listener
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
         onItemClickListener = listener
     }
 }

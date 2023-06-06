@@ -5,51 +5,48 @@ import android.content.Context
 import android.util.Patterns
 import androidx.biometric.BiometricManager
 import androidx.lifecycle.*
-import com.newsapp.newsapp.R
-import com.newsapp.newsapp.utils.NewsApp
-import com.newsapp.newsapp.utils.Utils
-import com.newsapp.newsapp.utils.Utils.showToast
 
 
 class LoginViewModel(var app: Application) : AndroidViewModel(app) {
 
-    val loginResult= MutableLiveData<Boolean>()
+    private val _loginValidationResult = MutableLiveData<LoginValidationResult>()
+    val loginValidationResult: LiveData<LoginValidationResult> = _loginValidationResult
 
-    fun login(email: String, password: String) {
-        if(validation(email,password)){
-            if(Utils.isInternetAvailable(getApplication<NewsApp>().baseContext)) {
-                loginResult.value = true
-            }else{
-                Utils.commonInternetAlert(getApplication<NewsApp>().baseContext, getApplication<NewsApp>().baseContext.getString(R.string.internet_not_avl))
-            }
+    fun validateLogin(username: String, password: String) {
+        val validationResult = when {
+            username.isEmpty() -> LoginValidationResult.EmptyUsername
+            Patterns.EMAIL_ADDRESS.matcher(username).matches()
+                .not() -> LoginValidationResult.InvalidUserName
+            password.isEmpty() -> LoginValidationResult.EmptyPassword
+            password.length < 6 -> LoginValidationResult.InvalidPassword
+            else -> LoginValidationResult.Success
         }
+
+        _loginValidationResult.value = validationResult
     }
 
-
-    fun validation(email: String, password: String): Boolean {
-            if (email.isEmpty()) {
-                showToast(getApplication<NewsApp>().baseContext,getApplication<NewsApp>().baseContext.getString(R.string.empty_emailid))
-                return false
-            }
-            if ( Patterns.EMAIL_ADDRESS.matcher(email).matches().not()) {
-                showToast(getApplication<NewsApp>().baseContext,getApplication<NewsApp>().baseContext.getString(R.string.valid_email_id))
-                return false
-            }
-            if (password.isEmpty()) {
-                showToast(getApplication<NewsApp>().baseContext,getApplication<NewsApp>().baseContext.getString(R.string.empty_password))
-                return false
-            }
-            if (password.length < 6) {
-                showToast(getApplication<NewsApp>().baseContext,getApplication<NewsApp>().baseContext.getString(R.string.valid_password))
-                return false
-            }
-
-            return true
+    sealed class LoginValidationResult {
+        object EmptyUsername : LoginValidationResult()
+        object EmptyPassword : LoginValidationResult()
+        object InvalidUserName : LoginValidationResult()
+        object InvalidPassword : LoginValidationResult()
+        object Success : LoginValidationResult()
     }
 
+    /**
+    Checks the biometric capability of the device.
+    @param context The context to use for accessing the BiometricManager.
+    @return An integer representing the biometric capability status:
+     **/
     fun hasBiometricCapability(context: Context): Int {
+        // Create a BiometricManager instance
         val biometricManager = BiometricManager.from(context)
-        return biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+
+        // Check the biometric capability and return the result
+        return biometricManager.canAuthenticate(
+            BiometricManager.Authenticators.BIOMETRIC_STRONG or
+                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
+        )
     }
 
 

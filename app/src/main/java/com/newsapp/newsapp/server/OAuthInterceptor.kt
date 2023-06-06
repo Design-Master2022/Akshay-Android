@@ -11,12 +11,7 @@ class OAuthInterceptor : Interceptor {
         val request = chain.request().newBuilder()
         request.apply {
             addHeader("Content-Type", "application/json")
-            addHeader("type", "Surveyor")
         }
-//        accessToken = CommonSharedPreferences.readString(CommonSharedPreferences.ACCESS_TOKEN)
-//        if (accessToken != null && accessToken?.isNotEmpty() == true) {
-//            request.header("Authorization", "$tokenType $accessToken")
-//        }
 
         return chain.proceed(request.build())
     }

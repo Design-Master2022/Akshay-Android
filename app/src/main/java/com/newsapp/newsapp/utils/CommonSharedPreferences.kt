@@ -122,8 +122,10 @@ class CommonSharedPreferences {
             return sharedPreference?.getFloat(key, default) ?: default
         }
 
+        /**
+         * Clear all preferences.
+         */
         fun clearPreferences() {
-
             sharedPreference?.edit()?.remove(IS_LOGGED_IN)?.apply()
         }
     }

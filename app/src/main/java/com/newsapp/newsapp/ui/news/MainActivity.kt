@@ -7,11 +7,10 @@ import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import android.widget.AdapterView
-import androidx.core.content.PackageManagerCompat.LOG_TAG
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.newsapp.newsapp.databinding.ActivityMainBinding
+import com.newsapp.newsapp.modal.Article
 import com.newsapp.newsapp.server.AppConstants
 import com.newsapp.newsapp.server.AppConstants.PAGE_SIZE
 import com.newsapp.newsapp.server.NetworkRepository
@@ -33,13 +32,13 @@ class MainActivity : BaseActivity() {
     private var countryName: String? = "us"
     private var categoryName: String? = "general"
 
-    private val newsCategories = mutableListOf<String>(
+    private val newsCategories = mutableListOf(
         "general", "business",
         "entertainment", "health",
         "science", "sports", "technology"
     )
 
-    private val countryList = mutableListOf<String>(
+    private val countryList = mutableListOf(
         "us", "ar",
         "in"
     )
@@ -68,13 +67,13 @@ class MainActivity : BaseActivity() {
 
         addRecyclerView()
 
-        viewModel.newsList.observe(this, Observer { response ->
+        viewModel.newsList.observe(this) { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data.let { newsResponse ->
                         newsListAdapter.differ.submitList(newsResponse?.articles)
-                        Log.e(TAG, "onCreate Internet : "+ newsResponse?.articles?.size )
+                        Log.e(TAG, "onCreate Internet : " + newsResponse?.articles?.size)
                         val totalPages = ((newsResponse?.totalResults)?.div(PAGE_SIZE) ?: 1) + 2
                         isLastPage = viewModel.topHeadLinesNewsPage == totalPages
                         if (isLastPage) {
@@ -92,7 +91,7 @@ class MainActivity : BaseActivity() {
                     showProgressBar()
                 }
             }
-        })
+        }
 
         binding.spCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -183,7 +182,7 @@ class MainActivity : BaseActivity() {
             val shouldPaginate = isNotLoadingAndNotLastPage && isNotAtBeginning && isAtLastItem &&
                     isTotalMoreThanVisible && isScrolling
             if (shouldPaginate) {
-                viewModel.getTopHeadLines("us", "general")
+                viewModel.getTopHeadLines(AppConstants.DEFAULT_COUNTRY, AppConstants.DEFAULT_CATEGORY)
                 isScrolling = false
             }
         }
@@ -197,30 +196,37 @@ class MainActivity : BaseActivity() {
     }
 
     private fun addRecyclerView() {
-        newsListAdapter = NewsListAdapter()
-        binding.recyclerView.apply {
-            adapter = newsListAdapter
-            layoutManager = LinearLayoutManager(baseContext)
-            addOnScrollListener(this@MainActivity.scrollListener)
+        newsListAdapter = NewsListAdapter().apply {
+            setOnItemClickListener(this@MainActivity::onArticleClicked)
         }
 
-        newsListAdapter.setOnItemClickListener { article ->
-            val intent = Intent(this, NewsDetailsActivity::class.java)
-            intent.putExtra(AppConstants.DETAIL_NEWS, article)
-            startActivity(intent)
+        binding.recyclerView.apply {
+            adapter = newsListAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            addOnScrollListener(scrollListener)
         }
     }
 
+    private fun onArticleClicked(article: Article) {
+        val intent = Intent(this, NewsDetailsActivity::class.java)
+        intent.putExtra(AppConstants.DETAIL_NEWS, article)
+        startActivity(intent)
+    }
+
     private fun hideProgressBar() {
-        binding.shimmerViewContainer.stopShimmer()
-        binding.shimmerViewContainer.visibility = View.GONE
-        binding.swipeRefresh.isRefreshing = false
+        with(binding) {
+            shimmerViewContainer.stopShimmer()
+            shimmerViewContainer.visibility = View.GONE
+            swipeRefresh.isRefreshing = false
+        }
         isLoading = false
     }
 
     private fun showProgressBar() {
-        binding.shimmerViewContainer.startShimmer()
-        binding.shimmerViewContainer.visibility = View.VISIBLE
+        with(binding) {
+            shimmerViewContainer.startShimmer()
+            shimmerViewContainer.visibility = View.VISIBLE
+        }
         isLoading = true
     }
 

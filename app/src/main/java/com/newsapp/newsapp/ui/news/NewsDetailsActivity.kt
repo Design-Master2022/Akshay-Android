@@ -1,13 +1,9 @@
 package com.newsapp.newsapp.ui.news
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -24,8 +20,9 @@ import com.newsapp.newsapp.utils.Utils
 class NewsDetailsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityNewsDetailsBinding
+
     private var article: Article? = null
-    var strNewsURL: String? = null
+    private var strNewsURL: String? = null
     private var strTitle: String? = null
     private var strSubTitle: String? = null
 
@@ -34,39 +31,33 @@ class NewsDetailsActivity : BaseActivity() {
         binding = ActivityNewsDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //get data intent
-        article = intent.getSerializableExtra(DETAIL_NEWS) as Article?
-        article?.let {
-
-            strNewsURL = article?.url
-            strTitle = article?.title
-            strSubTitle = article?.url
-
-            binding.tvTitle.text = strTitle
-            binding.tvSubTitle.text = strSubTitle
-
-            //show news
-            if(Utils.isInternetAvailable(this@NewsDetailsActivity)) {
-                showWebView()
-            } else{
-                commonInternetAlert(this@NewsDetailsActivity, baseContext.getString(R.string.internet_not_avl))
-            }
-        }
-
-
+        // Get data from intent
+        article = intent.getSerializableExtra(DETAIL_NEWS) as? Article
+        article?.let { populateArticleData(it) }
     }
 
-    private fun commonInternetAlert(context: Context, message: String) {
-        var customDialog: AlertDialog? = null
-        customDialog?.dismiss()
+    private fun populateArticleData(article: Article) {
+        strNewsURL = article.url
+        strTitle = article.title
+        strSubTitle = article.url
 
-        val binding: CommonAlertBinding = CommonAlertBinding
-            .inflate(LayoutInflater.from(context))
-        val customAlertBuilder = AlertDialog.Builder(context)
+        binding.tvTitle.text = strTitle
+        binding.tvSubTitle.text = strSubTitle
+
+        if (Utils.isInternetAvailable(this@NewsDetailsActivity)) {
+            showWebView()
+        } else {
+            commonInternetAlert(baseContext.getString(R.string.internet_not_avl))
+        }
+    }
+
+    private fun commonInternetAlert(message: String) {
+        val binding: CommonAlertBinding = CommonAlertBinding.inflate(layoutInflater)
+        val customAlertBuilder = AlertDialog.Builder(this@NewsDetailsActivity)
         customAlertBuilder.setView(binding.root)
-        customDialog = customAlertBuilder.create()
+        val customDialog = customAlertBuilder.create()
         customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        binding.tvCustomAlertMessage.text= message
+        binding.tvCustomAlertMessage.text = message
         binding.cardCustomAlertOk.setOnClickListener {
             customDialog.dismiss()
             finish()
@@ -75,21 +66,22 @@ class NewsDetailsActivity : BaseActivity() {
     }
 
     private fun showWebView() {
-        binding.webView.settings.loadsImagesAutomatically = true
-        binding.webView.settings.javaScriptEnabled = true
-        binding.webView.settings.domStorageEnabled = true
-        binding.webView.settings.setSupportZoom(true)
-        binding.webView.settings.builtInZoomControls = true
-        binding.webView.settings.displayZoomControls = false
-        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
-        binding.webView.loadUrl(strNewsURL!!)
+        binding.webView.apply {
+            settings.loadsImagesAutomatically = true
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.setSupportZoom(true)
+            settings.builtInZoomControls = true
+            settings.displayZoomControls = false
+            scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+            loadUrl(strNewsURL!!)
+        }
 
         showProgressBar()
 
         binding.webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, newUrl: String): Boolean {
                 view.loadUrl(newUrl)
-//                binding.progressBar.progress = 0
                 return true
             }
 
@@ -103,17 +95,19 @@ class NewsDetailsActivity : BaseActivity() {
         }
     }
 
-    private fun hideProgressBar (){
-        binding.shimmerFullViewContainer.visibility = View.GONE
-        binding.shimmerFullViewContainer.stopShimmer()
-        binding.webView.visibility = View.VISIBLE
+    private fun hideProgressBar() {
+        binding.apply {
+            shimmerFullViewContainer.visibility = View.GONE
+            shimmerFullViewContainer.stopShimmer()
+            webView.visibility = View.VISIBLE
+        }
     }
 
-    private fun showProgressBar () {
-        binding.shimmerFullViewContainer.visibility = View.VISIBLE
-        binding.shimmerFullViewContainer.startShimmer()
-        binding.webView.visibility = View.INVISIBLE
+    private fun showProgressBar() {
+        binding.apply {
+            shimmerFullViewContainer.visibility = View.VISIBLE
+            shimmerFullViewContainer.startShimmer()
+            webView.visibility = View.INVISIBLE
+        }
     }
-
-
 }
