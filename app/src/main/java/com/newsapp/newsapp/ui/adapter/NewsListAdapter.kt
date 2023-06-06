@@ -19,7 +19,6 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
         var tvNewsSource: TextView = itemView.findViewById(R.id.newsSource)
         var tvNewsTitle: TextView = itemView.findViewById(R.id.newsTitle)
         var ivNewsImage: ImageView = itemView.findViewById(R.id.iv_news_image)
-        var tvNewsTag: TextView = itemView.findViewById(R.id.tv_timetag)
     }
 
     // DiffUtil callback for efficient list updates

@@ -23,15 +23,4 @@ class NewsApp : Application() {
     fun getCacheDirectory(): Cache? {
         return cacheDir?.let { Cache(it, cacheSize.toLong()) }
     }
-
-    /**
-     * Check if the device has an active network connection.
-     *
-     * @return true if the device has a network connection, false otherwise.
-     */
-    fun hasNetwork(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-        return activeNetwork?.isConnected ?: false
-    }
 }

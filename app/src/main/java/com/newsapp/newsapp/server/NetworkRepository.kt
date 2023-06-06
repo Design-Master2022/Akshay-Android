@@ -3,6 +3,7 @@ package com.newsapp.newsapp.server
 import android.app.Application
 import com.newsapp.newsapp.BuildConfig
 import com.newsapp.newsapp.utils.NewsApp
+import com.newsapp.newsapp.utils.Utils
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -53,7 +54,7 @@ class NetworkRepository(private val application: Application) {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             var request: Request = chain.request()
-            if (!(application as NewsApp).hasNetwork()) {
+            if (Utils.isInternetAvailable(application.applicationContext)) {
                 request = request.newBuilder()
                     .removeHeader(AppConstants.HEADER_PRAGMA)
                     .header(AppConstants.HEADER_CACHE_CONTROL, "public, only-if-cached")

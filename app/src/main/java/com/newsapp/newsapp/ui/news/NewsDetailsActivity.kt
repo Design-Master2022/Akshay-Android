@@ -36,6 +36,11 @@ class NewsDetailsActivity : BaseActivity() {
         article?.let { populateArticleData(it) }
     }
 
+    /**
+     * Populates the UI with data from the provided [article].
+     * Sets the article's URL, title, and subtitle.
+     * Shows the web view if internet is available, otherwise shows a common internet alert.
+     */
     private fun populateArticleData(article: Article) {
         strNewsURL = article.url
         strTitle = article.title
@@ -47,10 +52,14 @@ class NewsDetailsActivity : BaseActivity() {
         if (Utils.isInternetAvailable(this@NewsDetailsActivity)) {
             showWebView()
         } else {
-            commonInternetAlert(baseContext.getString(R.string.internet_not_avl))
+            commonInternetAlert(getString(R.string.internet_not_avl))
         }
     }
 
+    /**
+     * Shows a common internet alert dialog with the provided [message].
+     * Dismisses the dialog and finishes the activity when the OK button is clicked.
+     */
     private fun commonInternetAlert(message: String) {
         val binding: CommonAlertBinding = CommonAlertBinding.inflate(layoutInflater)
         val customAlertBuilder = AlertDialog.Builder(this@NewsDetailsActivity)
@@ -65,6 +74,11 @@ class NewsDetailsActivity : BaseActivity() {
         customDialog.show()
     }
 
+    /**
+     * Shows the web view with the provided [strNewsURL].
+     * Configures web view settings, loads the URL, and sets up a web view client.
+     * Shows and hides the progress bar during page loading.
+     */
     private fun showWebView() {
         binding.webView.apply {
             settings.loadsImagesAutomatically = true
@@ -95,6 +109,9 @@ class NewsDetailsActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Hides the progress bar and shows the web view.
+     */
     private fun hideProgressBar() {
         binding.apply {
             shimmerFullViewContainer.visibility = View.GONE
@@ -103,6 +120,9 @@ class NewsDetailsActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Shows the progress bar and hides the web view.
+     */
     private fun showProgressBar() {
         binding.apply {
             shimmerFullViewContainer.visibility = View.VISIBLE
