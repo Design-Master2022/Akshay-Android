@@ -54,7 +54,7 @@ class NetworkRepository(private val application: Application) {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             var request: Request = chain.request()
-            if (Utils.isInternetAvailable(application.applicationContext)) {
+            if (!Utils.isInternetAvailable(application.applicationContext)) {
                 request = request.newBuilder()
                     .removeHeader(AppConstants.HEADER_PRAGMA)
                     .header(AppConstants.HEADER_CACHE_CONTROL, "public, only-if-cached")

@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.core.content.ContextCompat.startActivity
-import androidx.databinding.DataBindingUtil.setContentView
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.ui.BaseActivity
 import com.newsapp.newsapp.ui.news.MainActivity
