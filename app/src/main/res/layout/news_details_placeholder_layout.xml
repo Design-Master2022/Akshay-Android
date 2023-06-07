@@ -17,7 +17,6 @@
             android:layout_height="@dimen/_20sdp"
             android:background="@color/background" />
 
-
         <RelativeLayout
             android:id="@+id/news_content"
             android:layout_width="match_parent"
@@ -38,7 +37,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_below="@+id/subtitle"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:background="@color/background" />
 
         </RelativeLayout>
@@ -75,7 +74,6 @@
                 android:background="@color/background" />
 
         </RelativeLayout>
-
 
     </LinearLayout>
 </RelativeLayout>

@@ -32,31 +32,6 @@
         app:layout_constraintTop_toTopOf="@id/tv_home"
         app:tint="?attr/text_color" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/iv_add_profile"-->
-<!--        android:layout_width="@dimen/_24sdp"-->
-<!--        android:layout_height="@dimen/_24sdp"-->
-<!--        android:layout_marginStart="@dimen/_10sdp"-->
-<!--        android:layout_marginTop="@dimen/_4sdp"-->
-<!--        android:src="@drawable/ic_editprofile"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/tv_profile"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/tv_profile" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv_profile"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="@dimen/_45sdp"-->
-<!--        android:layout_marginStart="@dimen/_10sdp"-->
-<!--        android:gravity="center|start"-->
-<!--        android:text="@string/my_profile"-->
-<!--        android:textColor="?attr/text_color"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/iv_add_profile"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tv_home" />-->
-
-<!--    android:foregroundGravity="center_vertical"-->
-
     <ImageView
         android:id="@+id/iv_language"
         android:layout_width="@dimen/_24sdp"
@@ -76,25 +51,13 @@
         android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:gravity="center|start"
+        android:clickable="true"
         android:text="@string/change_lang"
         android:textColor="?attr/text_color"
         app:layout_constraintStart_toEndOf="@+id/iv_language"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home" />
-
-<!--    <androidx.appcompat.widget.AppCompatSpinner-->
-<!--        android:id="@+id/sp_lang"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="@dimen/_35sdp"-->
-<!--        android:layout_marginStart="@dimen/_5sdp"-->
-<!--        android:layout_marginEnd="@dimen/_6sdp"-->
-<!--        android:background="@drawable/header"-->
-<!--        android:entries="@array/lang"-->
-<!--        android:theme="@style/mySpinnerItemStyle"-->
-<!--        app:flow_horizontalBias="0"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/tv_language"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/tv_language"-->
-<!--        app:layout_constraintWidth_percent=".2" />-->
+        app:layout_constraintEnd_toStartOf="@+id/iv_lang"
+        app:layout_constraintTop_toBottomOf="@+id/tv_home"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/iv_lang"

@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_marginTop="@dimen/_15sdp"
-android:layout_marginLeft="@dimen/_5sdp"
-    >
-<LinearLayout android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/_2sdp"
-    android:paddingLeft="@dimen/_8sdp"
-    android:paddingRight="@dimen/_8sdp"
-    android:paddingBottom="@dimen/_8sdp"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_15sdp">
 
-    <View
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_12sdp"
-        android:background="@color/background" />
-
-
-    <RelativeLayout
-        android:id="@+id/news_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp">
 
         <View
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_12sdp"
             android:background="@color/background" />
 
-        <View
-            android:layout_width="@dimen/_55sdp"
-            android:layout_height="@dimen/_55sdp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:background="@color/background" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/news_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
 
+            <View
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@color/background" />
 
-    <RelativeLayout
-        android:id="@+id/news_metadata"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_height="wrap_content">
+            <View
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@color/background" />
 
+        </RelativeLayout>
 
-        <View
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:background="@color/background" />
+        <RelativeLayout
+            android:id="@+id/news_metadata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
 
-    </RelativeLayout>
+            <View
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:background="@color/background" />
 
+        </RelativeLayout>
 
-</LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
 

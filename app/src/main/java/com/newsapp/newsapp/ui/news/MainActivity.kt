@@ -140,6 +140,7 @@ class MainActivity : BaseActivity() {
                     CommonSharedPreferences.writeInt(CommonSharedPreferences.SELECTED_CATEGORY, position)
                     // Fetch top headlines with the selected country and category
                     countryName?.let { country -> viewModel.getTopHeadLines(country, it) }
+
                 }
             }
         }
@@ -244,6 +245,7 @@ class MainActivity : BaseActivity() {
 
     private fun hideProgressBar() {
         with(binding) {
+//            recyclerView.visibility = View.VISIBLE
             shimmerViewContainer.stopShimmer()
             shimmerViewContainer.visibility = View.GONE
             swipeRefresh.isRefreshing = false
@@ -253,6 +255,7 @@ class MainActivity : BaseActivity() {
 
     private fun showProgressBar() {
         with(binding) {
+//            recyclerView.visibility = View.GONE
             shimmerViewContainer.startShimmer()
             shimmerViewContainer.visibility = View.VISIBLE
         }

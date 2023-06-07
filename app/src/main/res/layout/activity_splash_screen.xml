@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="?attr/background_color"
     tools:context=".ui.login.SplashScreenActivity">
-<!--    android:background="@drawable/shape_round_corners"-->
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animImage"

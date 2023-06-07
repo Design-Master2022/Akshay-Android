@@ -144,9 +144,6 @@
             tools:listitem="@layout/news_item_layout"
             />
 
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

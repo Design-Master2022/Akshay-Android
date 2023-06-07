@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -30,6 +31,9 @@ class NewsDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Get data from intent
         article = intent.getSerializableExtra(DETAIL_NEWS) as? Article
@@ -129,5 +133,16 @@ class NewsDetailsActivity : BaseActivity() {
             shimmerFullViewContainer.startShimmer()
             webView.visibility = View.INVISIBLE
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Handle back button click here
+                onBackPressed() // or any other desired action
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
