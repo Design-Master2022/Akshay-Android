@@ -32,10 +32,10 @@ object AppConstants {
     /**
      * Default country code used for news API requests.
      */
-    const val DEFAULT_COUNTRY = "us"
+    const val DEFAULT_COUNTRY = ""
 
     /**
      * Default category used for news API requests.
      */
-    const val DEFAULT_CATEGORY = "general"
+    const val DEFAULT_CATEGORY = ""
 }

@@ -3,10 +3,9 @@ package com.newsapp.newsapp.ui.news
 import android.app.Application
 import androidx.lifecycle.*
 import com.newsapp.newsapp.modal.TopHeadLinesResponse
-import com.newsapp.newsapp.server.AppConstants.DEFAULT_CATEGORY
-import com.newsapp.newsapp.server.AppConstants.DEFAULT_COUNTRY
 import com.newsapp.newsapp.server.NetworkRepository
 import com.newsapp.newsapp.server.Resource
+import com.newsapp.newsapp.utils.CommonSharedPreferences
 import kotlinx.coroutines.*
 import retrofit2.Response
 
@@ -19,20 +18,30 @@ class MainViewModel constructor(
     var topHeadLinesNewsPage = 1
     var topHeadLinesNewsResponse: TopHeadLinesResponse? = null
 
-    init {
-        // Fetch initial data when the ViewModel is created
-        getTopHeadLines(DEFAULT_COUNTRY, DEFAULT_CATEGORY)
-    }
-
     /**
      * Fetches the top headlines based on the given [countryCode] and [category].
      */
     fun getTopHeadLines(countryCode: String, category: String) = viewModelScope.launch {
         // Post loading state before making the API request
-        newsList.postValue(Resource.Loading())
-        val response = networkRepository.getTopHeadLines(countryCode, category, topHeadLinesNewsPage)
-        newsList.postValue(handleTopHeadlineNewsResponse(response))
+        if(countryCode.isNotEmpty() && category.isNotEmpty()) {
+            newsList.postValue(Resource.Loading())
+            val response =
+                networkRepository.getTopHeadLines(countryCode, category, topHeadLinesNewsPage)
+            newsList.postValue(handleTopHeadlineNewsResponse(response))
+        }
     }
+
+    fun getDefaultCategory() : Int {
+        // Retrieve the selected category from shared preferences
+        return CommonSharedPreferences.readInt(CommonSharedPreferences.SELECTED_CATEGORY, 0)
+    }
+
+    fun getDefaultCountry() : Int {
+        // Retrieve the selected country from shared preferences
+        return  CommonSharedPreferences.readInt(CommonSharedPreferences.SELECTED_COUNTRY, 0)
+    }
+
+
 
     /**
      * Handles the response received from the top headlines API request.

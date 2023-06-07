@@ -22,8 +22,8 @@ interface NewsApi {
      */
     @GET(NEW_API_TOP_HEADLINES)
     suspend fun getTopHeadLines(
-        @Query("country") country: String = AppConstants.DEFAULT_COUNTRY,
-        @Query("category") category: String = AppConstants.DEFAULT_CATEGORY,
+        @Query("country") country: String = "",
+        @Query("category") category: String = "",
         @Query("page") pageNumber: Int = 1
     ): Response<TopHeadLinesResponse>
 }

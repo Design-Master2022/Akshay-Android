@@ -9,6 +9,7 @@ import android.widget.AbsListView
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.util.Util
 import com.google.android.material.snackbar.Snackbar
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.databinding.ActivityMainBinding
@@ -32,8 +33,8 @@ class MainActivity : BaseActivity() {
     private lateinit var networkRepository: NetworkRepository
     private lateinit var binding: ActivityMainBinding
     private val TAG = "MainActivity"
-    private var countryName: String? = AppConstants.DEFAULT_COUNTRY // Default country name
-    private var categoryName: String? = AppConstants.DEFAULT_CATEGORY  // Default category name
+    private var countryName: String? = "" // Default country name
+    private var categoryName: String? = ""  // Default category name
 
     // List of news categories
     private val newsCategories = mutableListOf(
@@ -64,14 +65,12 @@ class MainActivity : BaseActivity() {
             when (response) {
                 is Resource.Success -> {
                     // Handle successful response
-                    hideProgressBar()
                     response.data.let { newsResponse ->
+                        newsListAdapter.differ.submitList(emptyList())
                         // Update the list adapter with the new articles
                         newsListAdapter.differ.submitList(newsResponse?.articles)
-                        // Log the size of articles
-                        Log.d(TAG, "onCreate Internet : ${newsResponse?.articles?.size}")
                         // Calculate the total number of pages
-                        val totalPages = ((newsResponse?.totalResults)?.div(PAGE_SIZE) ?: 1) + 2
+                        val totalPages = (newsResponse?.totalResults)?.div(PAGE_SIZE)?.plus(2)
                         // Check if it's the last page based on the current page number
                         isLastPage = viewModel.topHeadLinesNewsPage == totalPages
                         // Set padding if it's the last page
@@ -79,48 +78,50 @@ class MainActivity : BaseActivity() {
                             binding.recyclerView.setPadding(0, 0, 0, 0)
                         }
                     }
+                    hideProgressBar()
                 }
                 is Resource.Error -> {
                     // Handle error response
-                    hideProgressBar()
                     if(!Utils.isInternetAvailable(baseContext)){
                         showSnackbar(
                             getString(R.string.internet_not_avl), binding.mainRootLayout,
                             Snackbar.LENGTH_SHORT
                         )
+                        hideProgressBar()
                         return@observe
-                    }
-                    response.message?.let { message ->
-                        showSnackbar(
-                            message, binding.mainRootLayout,
-                            Snackbar.LENGTH_SHORT
-                        )
+                    } else {
+                        response.message?.let { message ->
+                            showSnackbar(
+                                message, binding.mainRootLayout,
+                                Snackbar.LENGTH_SHORT
+                            )
+                        }
+                        noDataAvailable()
                     }
                 }
                 is Resource.Loading -> {
                     // Handle loading state
+                    if(Utils.isInternetAvailable(baseContext))
+                        newsListAdapter.differ.submitList(emptyList())
                     showProgressBar()
                 }
             }
         }
 
-        setDefaultCountry()
-        setDefaultCategory()
+        setDefaultCountry(viewModel.getDefaultCountry())
+        setDefaultCategory(viewModel.getDefaultCategory())
+
     }
 
-    private fun setDefaultCategory(){
-        // Retrieve the selected category from shared preferences
-        val selectedCategory = CommonSharedPreferences.readInt(CommonSharedPreferences.SELECTED_CATEGORY)
+    private fun setDefaultCategory(countryPos: Int) {
         // Set the selected category in the Spinner
-        binding.spCategory.setSelection(selectedCategory)
+        binding.spCategory.setSelection(countryPos)
     }
 
 
-    private fun setDefaultCountry(){
-        // Retrieve the selected country from shared preferences
-        val selectedCountry = CommonSharedPreferences.readInt(CommonSharedPreferences.SELECTED_COUNTRY)
+    private fun setDefaultCountry(countryPos: Int) {
         // Set the selected country in the Spinner
-        binding.spCountry.setSelection(selectedCountry)
+        binding.spCountry.setSelection(countryPos)
     }
 
     private fun setUI(){
@@ -233,10 +234,14 @@ class MainActivity : BaseActivity() {
                     isTotalMoreThanVisible && isScrolling
 
             if (shouldPaginate) {
-                viewModel.getTopHeadLines(
-                    AppConstants.DEFAULT_COUNTRY,
-                    AppConstants.DEFAULT_CATEGORY
-                )
+                countryName?.let {
+                    categoryName?.let { it1 ->
+                        viewModel.getTopHeadLines(
+                            it,
+                            it1
+                        )
+                    }
+                }
                 isScrolling = false
             }
         }
@@ -270,17 +275,30 @@ class MainActivity : BaseActivity() {
 
     private fun hideProgressBar() {
         with(binding) {
-//            recyclerView.visibility = View.VISIBLE
+            shimmerViewContainer.stopShimmer()
+            shimmerViewContainer.visibility = View.GONE
+            noDataAvailbale.visibility = View.GONE
+            swipeRefresh.isRefreshing = false
+            recyclerView.visibility = View.VISIBLE
+        }
+        isLoading = false
+    }
+
+    private fun noDataAvailable() {
+        with(binding) {
+            recyclerView.visibility = View.GONE
             shimmerViewContainer.stopShimmer()
             shimmerViewContainer.visibility = View.GONE
             swipeRefresh.isRefreshing = false
+            noDataAvailbale.visibility = View.VISIBLE
         }
         isLoading = false
     }
 
     private fun showProgressBar() {
         with(binding) {
-//            recyclerView.visibility = View.GONE
+            noDataAvailbale.visibility = View.GONE
+            recyclerView.visibility = View.GONE
             shimmerViewContainer.startShimmer()
             shimmerViewContainer.visibility = View.VISIBLE
         }
