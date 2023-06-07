@@ -26,6 +26,7 @@
     <item name="button_color">@color/teal_200</item>
     <item name="button_text_color">@color/black</item>
     <item name="text_light_color">#999999</item>
+    <item name="snack_bar_corner_color">@color/red</item>
     <item name="android:dropDownListViewStyle">@style/mySpinnerItemStyle</item>
 
   </style>
@@ -43,8 +44,15 @@
     <item name="button_color">@color/teal_200</item>
     <item name="button_text_color">@color/white</item>
     <item name="text_light_color">#999999</item>
+    <item name="snack_bar_corner_color">@color/red</item>
     <item name="android:dropDownListViewStyle">@style/mySpinnerItemStyle</item>
 
+  </style>
+
+  <style name="SnackbarTextStyle" parent="@android:style/TextAppearance">
+    <item name="android:textColor">?attr/text_color</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textSize">@dimen/_10sdp</item>
   </style>
 
   <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">

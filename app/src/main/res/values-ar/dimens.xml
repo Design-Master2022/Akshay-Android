@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard_padding">32dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_1">1dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_8">8dp</dimen>
+    <dimen name="activityPadding">16dp</dimen>
+    <dimen name="placeholderImage">60dp</dimen>
+    <dimen name="placeholderTextHeight">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="theme_filled_button_radius">4dp</dimen>
+</resources>

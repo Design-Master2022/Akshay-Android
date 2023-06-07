@@ -39,9 +39,10 @@ class NetworkRepository(private val application: Application) {
                 ) ||
                 cacheControl.contains("must-revalidate") || cacheControl.contains("max-age=0")
             ) {
+                val maxAge = 60 // Cache is valid for 1 minute
                 originalResponse.newBuilder()
                     .removeHeader(AppConstants.HEADER_PRAGMA)
-                    .header(AppConstants.HEADER_CACHE_CONTROL, "public, max-age=" + 5000)
+                    .header(AppConstants.HEADER_CACHE_CONTROL, "public, max-age=$maxAge")
                     .build()
             } else {
                 originalResponse
@@ -55,9 +56,10 @@ class NetworkRepository(private val application: Application) {
         override fun intercept(chain: Interceptor.Chain): Response {
             var request: Request = chain.request()
             if (!Utils.isInternetAvailable(application.applicationContext)) {
+                val maxStale = 60 * 60 * 24 * 7 // Cache is valid for 7 days
                 request = request.newBuilder()
                     .removeHeader(AppConstants.HEADER_PRAGMA)
-                    .header(AppConstants.HEADER_CACHE_CONTROL, "public, only-if-cached")
+                    .header(AppConstants.HEADER_CACHE_CONTROL, "public, only-if-cached, max-stale=$maxStale")
                     .build()
             }
             return chain.proceed(request)

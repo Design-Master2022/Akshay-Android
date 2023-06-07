@@ -13,15 +13,16 @@ class LoginViewModel(var app: Application) : AndroidViewModel(app) {
     val loginValidationResult: LiveData<LoginValidationResult> = _loginValidationResult
 
     fun validateLogin(username: String, password: String) {
+        // Perform validation checks and store the result in validationResult
         val validationResult = when {
-            username.isEmpty() -> LoginValidationResult.EmptyUsername
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-                .not() -> LoginValidationResult.InvalidUserName
-            password.isEmpty() -> LoginValidationResult.EmptyPassword
-            password.length < 6 -> LoginValidationResult.InvalidPassword
-            else -> LoginValidationResult.Success
+            username.isEmpty() -> LoginValidationResult.EmptyUsername // Username is empty
+            Patterns.EMAIL_ADDRESS.matcher(username).matches().not() -> LoginValidationResult.InvalidUserName // Invalid username format
+            password.isEmpty() -> LoginValidationResult.EmptyPassword // Password is empty
+            password.length < 6 -> LoginValidationResult.InvalidPassword // Password length is less than 6 characters
+            else -> LoginValidationResult.Success // Login validation success
         }
 
+        // Update the loginValidationResult LiveData with the validationResult
         _loginValidationResult.value = validationResult
     }
 

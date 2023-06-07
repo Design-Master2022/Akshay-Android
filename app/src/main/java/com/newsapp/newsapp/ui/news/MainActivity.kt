@@ -9,6 +9,8 @@ import android.widget.AbsListView
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.newsapp.newsapp.R
 import com.newsapp.newsapp.databinding.ActivityMainBinding
 import com.newsapp.newsapp.modal.Article
 import com.newsapp.newsapp.server.AppConstants
@@ -20,6 +22,7 @@ import com.newsapp.newsapp.ui.adapter.NewsListAdapter
 import com.newsapp.newsapp.ui.home.ProfileActivity
 import com.newsapp.newsapp.utils.CommonSharedPreferences
 import com.newsapp.newsapp.utils.Utils
+import com.newsapp.newsapp.utils.Utils.showSnackbar
 
 
 class MainActivity : BaseActivity() {
@@ -80,8 +83,18 @@ class MainActivity : BaseActivity() {
                 is Resource.Error -> {
                     // Handle error response
                     hideProgressBar()
+                    if(!Utils.isInternetAvailable(baseContext)){
+                        showSnackbar(
+                            getString(R.string.internet_not_avl), binding.mainRootLayout,
+                            Snackbar.LENGTH_SHORT
+                        )
+                        return@observe
+                    }
                     response.message?.let { message ->
-                        Utils.showToast(this, "An Error Occurred: $message")
+                        showSnackbar(
+                            message, binding.mainRootLayout,
+                            Snackbar.LENGTH_SHORT
+                        )
                     }
                 }
                 is Resource.Loading -> {
@@ -176,7 +189,19 @@ class MainActivity : BaseActivity() {
        */
         binding.swipeRefresh.setOnRefreshListener {
             Log.i(TAG, "onRefresh called from SwipeRefreshLayout")
+            reloadNewsFeed()
 
+        }
+    }
+
+    private fun reloadNewsFeed(){
+        if(!Utils.isInternetAvailable(baseContext)){
+            showSnackbar(
+                getString(R.string.internet_not_avl), binding.mainRootLayout,
+                Snackbar.LENGTH_SHORT
+            )
+            binding.swipeRefresh.isRefreshing = false
+        } else {
             // This method performs the actual data-refresh operation.
             // The method calls setRefreshing(false) when it's finished.
             viewModel.topHeadLinesNewsResponse = null

@@ -67,7 +67,7 @@ class LoginActivity : BaseActivity() {
                     finish()
                 }
                 else -> {
-                    showToast(baseContext, getString(R.string.valid_password))
+                    showToast(baseContext, getString(R.string.an_error_occured))
                 }
             }
         }
