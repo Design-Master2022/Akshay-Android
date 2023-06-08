@@ -13,6 +13,7 @@ class NewsApp : Application() {
     override fun onCreate() {
         super.onCreate()
         CommonSharedPreferences.initialize(this)
+        Utils.setLocale(baseContext)
     }
 
     /**

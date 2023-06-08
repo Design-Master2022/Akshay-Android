@@ -26,10 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:textAlignment="viewStart"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintBottom_toBottomOf="@id/tv_home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_home" />
+        app:layout_constraintTop_toTopOf="@id/tv_home"
+        app:tint="?attr/text_color" />
 
     <TextView
         android:id="@+id/country_label"
@@ -42,6 +44,7 @@
         android:text="@string/country"
         android:textColor="?attr/text_light_color"
         android:textSize="@dimen/_10ssp"
+        android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_home"
         app:layout_constraintWidth_percent=".5" />
@@ -50,49 +53,58 @@
         android:id="@+id/sp_country"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
         android:background="@drawable/header"
         android:entries="@array/countries"
+        android:textAlignment="viewStart"
         android:popupBackground="?attr/background_color"
         android:theme="@style/mySpinnerItemStyle"
-        app:flow_horizontalBias="0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/country_label"
-        app:layout_constraintWidth_percent=".48" />
+         />
 
     <TextView
         android:id="@+id/category_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:gravity="center|start"
         android:text="@string/category"
+        android:textAlignment="viewStart"
         android:textColor="?attr/text_light_color"
         android:textSize="@dimen/_10ssp"
         app:layout_constraintStart_toEndOf="@+id/country_label"
         app:layout_constraintTop_toBottomOf="@+id/tv_home"
         app:layout_constraintWidth_percent=".5" />
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/sp_category"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_3sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
         android:background="@drawable/header"
+        android:textAlignment="viewStart"
         android:entries="@array/categories"
         android:popupBackground="?attr/background_color"
         android:theme="@style/mySpinnerItemStyle"
-        app:flow_horizontalBias="0"
+        app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/category_label"
         app:layout_constraintTop_toBottomOf="@+id/category_label"
-        app:layout_constraintWidth_percent=".48" />
+         />
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -155,7 +167,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_country"
-        android:text="No Data Found"
+        android:text="@string/no_data_found"
         android:gravity="center"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/_14sdp"

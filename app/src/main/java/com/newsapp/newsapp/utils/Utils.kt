@@ -157,6 +157,7 @@ object Utils {
         val res = context.resources
         val conf = res.configuration
         conf.locale = selectedLang
+        conf.setLayoutDirection(selectedLang)
         res.updateConfiguration(conf, res.displayMetrics)
     }
 
