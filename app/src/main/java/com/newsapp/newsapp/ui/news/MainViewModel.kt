@@ -3,6 +3,7 @@ package com.newsapp.newsapp.ui.news
 import android.app.Application
 import androidx.lifecycle.*
 import com.newsapp.newsapp.modal.TopHeadLinesResponse
+import com.newsapp.newsapp.server.AppConstants.DATA_NOT_CATCHED_CODE
 import com.newsapp.newsapp.server.NetworkRepository
 import com.newsapp.newsapp.server.Resource
 import com.newsapp.newsapp.utils.CommonSharedPreferences
@@ -60,7 +61,19 @@ class MainViewModel constructor(
                 }
                 return Resource.Success(topHeadLinesNewsResponse ?: resultResponse)
             }
+        } else {
+            val errorCode = response.code()
+            val errorMessage = response.message()
+
+            if (errorCode == DATA_NOT_CATCHED_CODE) {
+                if (topHeadLinesNewsResponse == null) {
+                    return Resource.DataNotCached(errorMessage, topHeadLinesNewsResponse)
+                } else if (topHeadLinesNewsResponse?.articles?.isEmpty() == false) {
+                    return Resource.Error(errorMessage, topHeadLinesNewsResponse)
+                }
+            }
         }
-        return Resource.Error(response.message())
+        return Resource.Error(response.message(), topHeadLinesNewsResponse)
     }
+
 }

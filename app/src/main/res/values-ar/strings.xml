@@ -1,6 +1,7 @@
 <resources>
   <string name="app_name">تطبيق الأخبار</string>
   <string name="internet_not_avl">الإنترنت غير متوفر !!</string>
+  <string name="internet_not_avl_swipe_to_ref">الاتصال بالإنترنت غير متوفر. يرجى تشغيل الإنترنت الخاص بك للتحقق من وجود تحديثات جديدة !!</string>
   <string name="ok">نعم</string>
   <string name="prompt_info_title">مصادقة تطبيق الأخبار</string>
   <string name="prompt_info_subtitle">الرجاء تسجيل الدخول للوصول</string>
@@ -49,10 +50,61 @@
   </array>
 
   <array name="countries">
-    <item name="select">حدد الدولة</item>
-    <item name="us">نحن</item>
-    <item name="ar">أر</item>
-    <item name="in">في</item>
+<!--    <item name="select">حدد الدولة</item>-->
+    <item name="ae">الإمارات العربية المتحدة (AE)</item>
+    <item name="ar">الأرجنتين (ar)</item>
+    <item name="at">النمسا (AT)</item>
+    <item name="au">أستراليا (AU)</item>
+    <item name="be">بلجيكا (BE)</item>
+    <item name="bg">بلغاريا (BG)</item>
+    <item name="br">البرازيل (BR)</item>
+    <item name="ca">كندا (CA)</item>
+    <item name="ch">سويسرا (CH)</item>
+    <item name="cn">الصين (CN)</item>
+    <item name="co">كولومبيا (CO)</item>
+    <item name="cu">كوبا (CU)</item>
+    <item name="cz">التشيك (CZ)</item>
+    <item name="de">ألمانيا (DE)</item>
+    <item name="eg">مصر (EG)</item>
+    <item name="fr">فرنسا (FR)</item>
+    <item name="gb">المملكة المتحدة (GB)</item>
+    <item name="gr">اليونان (GR)</item>
+    <item name="hk">هونغ كونغ (HK)</item>
+    <item name="hu">هنغاريا (HU)</item>
+    <item name="id">إندونيسيا (ID)</item>
+    <item name="ie">أيرلندا (IE)</item>
+    <item name="il">إسرائيل (IL)</item>
+    <item name="in">الهند (IN)</item>
+    <item name="it">إيطاليا (IT)</item>
+    <item name="jp">اليابان (JP)</item>
+    <item name="kr">كوريا الجنوبية (KR)</item>
+    <item name="lt">ليتوانيا (LT)</item>
+    <item name="lv">لاتفيا (LV)</item>
+    <item name="ma">المغرب (MA)</item>
+    <item name="mx">المكسيك (MX)</item>
+    <item name="my">ماليزيا (MY)</item>
+    <item name="ng">نيجيريا (NG)</item>
+    <item name="nl">هولندا (NL)</item>
+    <item name="no">النرويج (NO)</item>
+    <item name="nz">نيوزيلندا (NZ)</item>
+    <item name="ph">الفلبين (PH)</item>
+    <item name="pl">بولندا (PL)</item>
+    <item name="pt">البرتغال (PT)</item>
+    <item name="ro">رومانيا (RO)</item>
+    <item name="rs">صربيا (RS)</item>
+    <item name="ru">روسيا (RU)</item>
+    <item name="sa">المملكة العربية السعودية (SA)</item>
+    <item name="se">السويد (SE)</item>
+    <item name="sg">سنغافورة (SG)</item>
+    <item name="si">سلوفينيا (SI)</item>
+    <item name="sk">سلوفاكيا (SK)</item>
+    <item name="th">تايلاند (TH)</item>
+    <item name="tr">تركيا (TR)</item>
+    <item name="tw">تايوان (TW)</item>
+    <item name="ua">أوكرانيا (UA)</item>
+    <item name="us">الولايات المتحدة الأمريكية (US)</item>
+    <item name="ve">فنزويلا (VE)</item>
+    <item name="za">جنوب أفريقيا (ZA)</item>
   </array>
 
 

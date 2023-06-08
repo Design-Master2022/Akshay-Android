@@ -29,13 +29,6 @@ object AppConstants {
      */
     const val HEADER_PRAGMA = "Pragma"
 
-    /**
-     * Default country code used for news API requests.
-     */
-    const val DEFAULT_COUNTRY = ""
-
-    /**
-     * Default category used for news API requests.
-     */
-    const val DEFAULT_CATEGORY = ""
+    // HTTP status code indicating that the requested data is not available in the cache
+    const val DATA_NOT_CATCHED_CODE = 504
 }

@@ -1,6 +1,7 @@
 <resources>
   <string name="app_name">News App</string>
   <string name="internet_not_avl">Internet not available!!</string>
+  <string name="internet_not_avl_swipe_to_ref">Internet connection is not available. Please turn on your internet to check for new updates!!</string>
   <string name="ok">ok</string>
   <string name="prompt_info_title">News App Authentication</string>
   <string name="prompt_info_subtitle">Please login to get access</string>
@@ -50,9 +51,60 @@
 
   <array name="countries">
 <!--    <item name="select">Select Country</item>-->
-    <item name="us">US</item>
-    <item name="ar">AR</item>
-    <item name="in">In</item>
+    <item name="ae">United Arab Emirates (ae)</item>
+    <item name="ar">Argentina (ar)</item>
+    <item name="at">Austria (at)</item>
+    <item name="au">Australia (au)</item>
+    <item name="be">Belgium (be)</item>
+    <item name="bg">Bulgaria (bg)</item>
+    <item name="br">Brazil (br)</item>
+    <item name="ca">Canada (ca)</item>
+    <item name="ch">Switzerland (ch)</item>
+    <item name="cn">China (cn)</item>
+    <item name="co">Colombia (co)</item>
+    <item name="cu">Cuba (cu)</item>
+    <item name="cz">Czech Republic (cz)</item>
+    <item name="de">Germany (de)</item>
+    <item name="eg">Egypt (eg)</item>
+    <item name="fr">France (fr)</item>
+    <item name="gb">United Kingdom (gb)</item>
+    <item name="gr">Greece (gr)</item>
+    <item name="hk">Hong Kong (hk)</item>
+    <item name="hu">Hungary (hu)</item>
+    <item name="id">Indonesia (id)</item>
+    <item name="ie">Ireland (ie)</item>
+    <item name="il">Israel (il)</item>
+    <item name="in">India (in)</item>
+    <item name="it">Italy (it)</item>
+    <item name="jp">Japan (jp)</item>
+    <item name="kr">South Korea (kr)</item>
+    <item name="lt">Lithuania (lt)</item>
+    <item name="lv">Latvia (lv)</item>
+    <item name="ma">Morocco (ma)</item>
+    <item name="mx">Mexico (mx)</item>
+    <item name="my">Malaysia (my)</item>
+    <item name="ng">Nigeria (ng)</item>
+    <item name="nl">Netherlands (nl)</item>
+    <item name="no">Norway (no)</item>
+    <item name="nz">New Zealand (nz)</item>
+    <item name="ph">Philippines (ph)</item>
+    <item name="pl">Poland (pl)</item>
+    <item name="pt">Portugal (pt)</item>
+    <item name="ro">Romania (ro)</item>
+    <item name="rs">Serbia (rs)</item>
+    <item name="ru">Russia (ru)</item>
+    <item name="sa">Saudi Arabia (sa)</item>
+    <item name="se">Sweden (se)</item>
+    <item name="sg">Singapore (sg)</item>
+    <item name="si">Slovenia (si)</item>
+    <item name="sk">Slovakia (sk)</item>
+    <item name="th">Thailand (th)</item>
+    <item name="tr">Turkey (tr)</item>
+    <item name="tw">Taiwan (tw)</item>
+    <item name="ua">Ukraine (ua)</item>
+    <item name="us">United States (us)</item>
+    <item name="ve">Venezuela (ve)</item>
+    <item name="za">South Africa (za)</item>
   </array>
 
 </resources>

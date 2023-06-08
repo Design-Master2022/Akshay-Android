@@ -27,6 +27,14 @@ sealed class Resource<T>(
     class Error<T>(message: String?, data: T? = null) : Resource<T>(data, message)
 
     /**
+     * Represents a Resource subclass indicating that the requested data is not cached.
+     *
+     * @param message Optional error message explaining the reason for data not being cached.
+     * @param data The data associated with the resource.
+     */
+    class DataNotCached<T>(message: String?, data: T? = null) : Resource<T>(data, message)
+
+    /**
      * Represents a loading data operation state.
      */
     class Loading<T> : Resource<T>()

@@ -9,7 +9,6 @@ import android.widget.AbsListView
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.util.Util
 import com.google.android.material.snackbar.Snackbar
 import com.newsapp.newsapp.R
 import com.newsapp.newsapp.databinding.ActivityMainBinding
@@ -45,8 +44,11 @@ class MainActivity : BaseActivity() {
 
     // List of countries
     private val countryList = mutableListOf(
-        "us", "ar",
-        "in"
+        "ae", "ar","at", "au", "be", "bg", "br", "ca",
+        "ch", "cn", "co", "cu", "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id",
+        "ie", "il", "in", "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng", "nl",
+        "no", "nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr",
+        "tw","ua","us","ve","za"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +68,6 @@ class MainActivity : BaseActivity() {
                 is Resource.Success -> {
                     // Handle successful response
                     response.data.let { newsResponse ->
-                        newsListAdapter.differ.submitList(emptyList())
                         // Update the list adapter with the new articles
                         newsListAdapter.differ.submitList(newsResponse?.articles)
                         // Calculate the total number of pages
@@ -80,6 +81,13 @@ class MainActivity : BaseActivity() {
                     }
                     hideProgressBar()
                 }
+                is Resource.DataNotCached -> {
+                        showSnackbar(
+                            getString(R.string.internet_not_avl), binding.mainRootLayout,
+                            Snackbar.LENGTH_SHORT
+                        )
+                        noDataAvailable()
+                }
                 is Resource.Error -> {
                     // Handle error response
                     if(!Utils.isInternetAvailable(baseContext)){
@@ -87,8 +95,6 @@ class MainActivity : BaseActivity() {
                             getString(R.string.internet_not_avl), binding.mainRootLayout,
                             Snackbar.LENGTH_SHORT
                         )
-                        hideProgressBar()
-                        return@observe
                     } else {
                         response.message?.let { message ->
                             showSnackbar(
@@ -96,12 +102,12 @@ class MainActivity : BaseActivity() {
                                 Snackbar.LENGTH_SHORT
                             )
                         }
-                        noDataAvailable()
                     }
+                    hideProgressBar()
                 }
                 is Resource.Loading -> {
                     // Handle loading state
-                    if(Utils.isInternetAvailable(baseContext))
+                    if(viewModel.topHeadLinesNewsPage == 1)
                         newsListAdapter.differ.submitList(emptyList())
                     showProgressBar()
                 }
@@ -198,7 +204,7 @@ class MainActivity : BaseActivity() {
     private fun reloadNewsFeed(){
         if(!Utils.isInternetAvailable(baseContext)){
             showSnackbar(
-                getString(R.string.internet_not_avl), binding.mainRootLayout,
+                getString(R.string.internet_not_avl_swipe_to_ref), binding.mainRootLayout,
                 Snackbar.LENGTH_SHORT
             )
             binding.swipeRefresh.isRefreshing = false
